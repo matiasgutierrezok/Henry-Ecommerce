@@ -4,7 +4,7 @@ import ProductDetail from './components/product/ProductDetail.jsx';
 import Board from './components/board/Board.jsx';
 import NavBar from './components/navbar/NavBar.jsx';
 import CreateProduct from './components/createproduct/CreateProduct.jsx';
-import {BrowserRouter, Route, Link} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 
 
 
