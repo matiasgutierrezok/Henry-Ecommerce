@@ -16,10 +16,13 @@ fs.readdirSync(__dirname)
   });
 
 const {
-  User
+  User,
+  Product
 } = models;
 
 // Add model relationships here
+
+Product.belongsTo(User, { as: 'author' });
 
 
 module.exports = models;
