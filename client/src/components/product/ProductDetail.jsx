@@ -1,13 +1,13 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
-
-export default function Product({id, title, price, description, stock, category, img }) {
+export default function ProductDetail({id, title, price, description, stock, category, img }) {
   return (
     <div >
         <div className="container">
           <h1 >{title}</h1>
           <div>
-          	<div className="col-sm-4 col-md-4 col-lg-4">
+          	<div className="col-sm-2 col-md-4 col-lg-4">
               <img src={img} width="80" height="80" alt="" />
             </div>
             <div className="col-sm-2 col-md-2 col-lg-2">
@@ -25,6 +25,10 @@ export default function Product({id, title, price, description, stock, category,
             <div className="col-sm-2 col-md-2 col-lg-2">
               <span>Description: </span>
               <span>{description}</span>
+            </div>
+            <div className="col-sm-2 col-md-2 col-lg-2">
+             
+              <button > <Link to="/product">Return to products </Link></button>
             </div>
           </div>
         </div>

@@ -1,7 +1,9 @@
 import React from 'react';
 import './ProductCard.css';
+import {Link} from "react-router-dom";
 
 export default function ProductCard ({id, title, price, img, details}) {
+
     function alerta (e){
       e.preventDefault(); 
       details(id);
@@ -20,7 +22,9 @@ export default function ProductCard ({id, title, price, img, details}) {
               <span>${price}</span>
             </div>
             <form className="col-sm-3 col-md-3 col-lg-3">
-              <button onClick={alerta}>Detalles</button>
+                
+                <button onClick={alerta}> <Link to="/productdetail">Detalles </Link></button>
+              
             </form>
           </div>
         </div>
