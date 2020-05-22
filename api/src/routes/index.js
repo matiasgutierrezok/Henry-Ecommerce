@@ -2,6 +2,7 @@ const { Router } = require('express');
 // import all routers;
 const authRouter = require('./auth.js');
 const userRouter = require('./user.js');
+const productRouter = require('./product.js');
 
 
 
