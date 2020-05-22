@@ -3,8 +3,6 @@ const server = require('express').Router();
 const { Product, User } = require('models/index.js');
 //App.js ya tiene incluido un bodyParser
 
-//array de productos, holis sofi.
-const products = [];
 /**Producto esta formado de 
     itemID: id
     itemName: string
@@ -19,7 +17,6 @@ const products = [];
 /**
  * Interacciones
  * Get *Todos +
- * Get *Algunos x Categoria o semejanza(?)
  * Get *Especifico
  * Post *Crear Nuevo
  * Delete *Especifico
@@ -45,7 +42,6 @@ server.get('/:id', function( req, res, next){
         }
 
     }).then((product) => {
-        console.log(product)
         res.send(products)
     });
     
@@ -56,13 +52,7 @@ server.post('/', function(req, res, next) {
     //Si el usuario esta registrado y crea el producto me traigo estos datos
     const { name, description, stock, price, img, createdBy } = req.body;
 
-    Product.create({
-        where:{
-            nameProduct,
-            createdBy,
-        }
-    }).then((products) => {
-        return Product.create({
+        Product.create({
             name: name,
             description: description,
             stock: stock,
@@ -112,8 +102,6 @@ server.delete('/', function(req,res,next){
     res.send({success: true});
 
 })
-
-
 
 
 
