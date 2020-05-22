@@ -17,12 +17,18 @@ fs.readdirSync(__dirname)
 
 const {
   User,
-  Product
+  Product,
+  Categories
 } = models;
 
 // Add model relationships here
 
 Product.belongsTo(User, { as: 'author' });
-
+Product.belongsToMany(Categories, {
+  through: 'categoriesAssociation'
+})
+Categories.belongsToMany(Product, {
+  through: 'categoriesAssociation'
+})
 
 module.exports = models;

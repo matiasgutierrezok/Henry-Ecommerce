@@ -13,7 +13,7 @@ describe('Product model', () => {
         describe('title', () => {
             it('should throw an error if title is empty', (done) => {
                 Product.create({})
-                    .then(() => done(new Error('It requires a valid email')))
+                    .then(() => done(new Error('It requires a valid title')))
                     .catch(() => done());
             });
             it('should return a valid string as title', (done) => {
@@ -23,16 +23,20 @@ describe('Product model', () => {
                     .then(() => done(new Error('Title cannot be empty')))
                     .catch(() => done());
             });
-            // it('should throw an error if is not a string', (done) => {
-            //     Product.create({
-            //         email: [],
-            //     })
-            //         .then(() => done(new Error('It needs only to accept strings')))
-            //         .catch(() => done());
-            // });
-            // it('should work when its a valid email', () => {
-            //     Product.create({ email: 'valid@email.com' });
-            // });
+            it('should use a float number for price', (done) => {
+                Product.create({
+                    price: 1453.67,
+                })
+                    .then(() => done(new Error('Only accept numbers as price')))
+                    .catch(() => done());
+            });
+            it('should throw an error if doesnt have a category', (done) => {
+                Product.create({
+                    //category: '',
+                })
+                    .then(() => done(new Error('It needs at least one category')))
+                    .catch(() => done());
+            });
         });
     });
 });
