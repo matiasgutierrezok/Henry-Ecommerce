@@ -31,7 +31,7 @@ server.get('/', (req, res, next) =>{
         res.send(products))
         .catch(next);
 });
-
+// get
 server.get('/:id', function( req, res, next){
     //Producto de ID especifico
     
