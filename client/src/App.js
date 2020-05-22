@@ -44,6 +44,7 @@ function App() {
             <Route path="/">
               <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
             </Route>
+            
   
             <Route exact path="/product" >
               {!arrfiltrado && <Board products={arr} details={details} />}
@@ -57,7 +58,7 @@ function App() {
                <CreateProduct />
             </Route>
             <Route path="/createproduct/:id" component={ModifyProduct}>
-               <ModifyProduct />
+           
             </Route>
         
 
