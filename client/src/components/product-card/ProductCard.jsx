@@ -1,12 +1,17 @@
 import React from 'react';
 import './ProductCard.css';
 
-export default function ProductCard ({id, title, price, img}) {
+export default function ProductCard ({id, title, price, img, details}) {
+    function alerta (e){
+      e.preventDefault(); 
+      details(id);
+    }
+
     return (
       <div className="card">
         <div className="card-body">
           <div className="col-sm-3 col-md-3 col-lg-3">
-              <img className="iconoClima" src={img} width="100" height="100" alt="" />
+              <img  className="iconoClima" src={img} width="100" height="100" alt="" />
           </div>
           <div className="row">
             <h1 className="card-title">{title}</h1>
@@ -14,6 +19,9 @@ export default function ProductCard ({id, title, price, img}) {
               <span>Price: </span>
               <span>${price}</span>
             </div>
+            <form className="col-sm-3 col-md-3 col-lg-3">
+              <button onClick={alerta}>Detalles</button>
+            </form>
           </div>
         </div>
       </div>

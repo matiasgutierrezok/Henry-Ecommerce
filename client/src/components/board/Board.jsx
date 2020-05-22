@@ -3,14 +3,12 @@ import './Board.css';
 
 import ProductCard from '../product-card/ProductCard.jsx';
 
-export default function Cards({products}) {
+export default function Cards({products, details}) {
   var [filter, setFilter] = useState('');
 
-    
+
     function onSubmit (e) {
         e.preventDefault(); 
-        
-        
     }
 
   return (
@@ -24,6 +22,7 @@ export default function Cards({products}) {
           title={c.title}
           price={c.price}
           img= {c.img}
+          details= {details}
         />
       )}
       {filter && products.filter((prod) => prod.category.includes(filter)).map(c => <ProductCard 
@@ -31,6 +30,7 @@ export default function Cards({products}) {
           title={c.title}
           price={c.price}
           img= {c.img}
+          details= {details}
         />
       )}
     </div>
