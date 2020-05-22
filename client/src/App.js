@@ -5,6 +5,7 @@ import Board from './components/board/Board.jsx';
 import NavBar from './components/navbar/NavBar.jsx';
 import CreateProduct from './components/createproduct/CreateProduct.jsx';
 import {BrowserRouter, Route} from "react-router-dom";
+import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
 
 
 
@@ -13,6 +14,7 @@ function App() {
   var [todetail, setTodetail] = useState(null);
   var [arrfiltrado, setArrfiltrado] = useState(null);
 
+
   var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
              {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
              {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
@@ -20,7 +22,6 @@ function App() {
   function details (id){
     console.log('skksks');
     setTodetail(arr.filter((p) => p.id === id)[0]);
-    
   }
 
   function handleFilter (filtro){
@@ -44,16 +45,19 @@ function App() {
               <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
             </Route>
   
-            <Route path="/product" >
+            <Route exact path="/product" >
               {!arrfiltrado && <Board products={arr} details={details} />}
               {!!arrfiltrado && <Board products={arrfiltrado}  details={details} />}
             </Route>
               
-            <Route path="/productdetail" >
-              {todetail && <ProductDetail {...todetail} />}
+            <Route path="/product/:id" >
+              <ProductDetail {...todetail} />
             </Route>
-            <Route path="/createproduct" >
+            <Route exact path="/createproduct" >
                <CreateProduct />
+            </Route>
+            <Route path="/createproduct/:id" component={ModifyProduct}>
+               <ModifyProduct />
             </Route>
         
 

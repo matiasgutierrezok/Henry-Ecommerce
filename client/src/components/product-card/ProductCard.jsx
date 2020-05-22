@@ -23,7 +23,7 @@ export default function ProductCard ({id, title, price, img, details}) {
             </div>
             <form className="col-sm-3 col-md-3 col-lg-3">
                 
-                <button onClick={alerta}> <Link to="/productdetail">Detalles </Link></button>
+                <button onClick={alerta}> <Link to={"/product/"+id}>Detalles </Link></button>
               
             </form>
           </div>

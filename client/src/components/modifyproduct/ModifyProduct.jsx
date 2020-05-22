@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 
 
 
-export default function CreateProduct () {
+export default function ModifyProduct (props) {
     var [newProduct, setNewProduct] = useState({title: '', price: '', stock: '', category: '', description: '', image: ''})
 
  
-
     function enviar (e){
       e.preventDefault();
       console.log(newProduct)
