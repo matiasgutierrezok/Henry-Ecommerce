@@ -1,25 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import ProductDetail from './components/product/ProductDetail.jsx';
+import Board from './components/board/Board.jsx';
+import NavBar from './components/navbar/NavBar.jsx';
+import CreateProduct from './components/createproduct/CreateProduct.jsx';
+import {BrowserRouter, Route} from "react-router-dom";
+import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
+
+var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
+             {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
+             {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
+  
+
 
 function App() {
+  var [todetail, setTodetail] = useState(null);
+  var [array, setArray] = useState(arr);
+
+
+  
+  function details (id){
+    console.log('skksks');
+    setTodetail(arr.filter((p) => p.id === id)[0]);
+  }
+
+  function handleFilter (filtro){
+    var array = arr.filter((p) => p.category.includes(filtro));
+    if (array.length > 0) {
+       setArray(array);
+    }else{
+       setArray(arr);
+    }
+  }
+
+  function removeFilter(){
+    setArray(arr);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div>
+        
+            <Route path="/">
+              <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
+            </Route>
+            
+  
+            <Route exact path="/product" >
+              <Board products={array} details={details} />
+              
+            </Route>
+              
+            <Route path="/product/:id" >
+              <ProductDetail {...todetail} />
+            </Route>
+            <Route exact path="/createproduct" >
+               <CreateProduct />
+            </Route>
+            <Route path="/createproduct/:id" component={ModifyProduct}>
+           
+            </Route>
+        
+
+
+      
+  
+      </div>
+    </BrowserRouter>
   );
 }
 
