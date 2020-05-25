@@ -5,7 +5,6 @@ const userRouter = require('./user.js');
 const productRouter = require('./product.js');
 
 
-
 const router = Router();
 
 // load each router on a route

@@ -32,7 +32,8 @@ const Product = (db, Sequelize) => {
             isUrl: true,
         },
     });
+
     return P;
 }
-
+console.log("Product Model: " + {Product});
 module.exports = Product;

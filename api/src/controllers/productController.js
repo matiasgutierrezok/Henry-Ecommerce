@@ -1,24 +1,14 @@
-const { Product } = require('models/product.js');
+const { Product } = require('models/Product.js')
 
-/**
-    Producto esta formado de
-    ID: id
-    Name: string
-    Description: text
-    Stock: numero mayor que 0
-    Price: numero mayor que 0
-    Img: url
-    Category: array de category
-    createdBy: User (debe estar autenticado/Registrado) idea para version 2
-*/
+console.log("Esto es Prod? " + {Product});
 
-export function getProducts(req, res, next) {
+function getProducts(req, res, next) {
   return Product.findAll()
     .then(products => res.json(products))
     .catch(next);
 }
 
-export function getOneProduct(req, res, next) {
+function getOneProduct(req, res, next) {
   // Producto de ID especifico
   const { id } = req.params;
 
@@ -31,7 +21,7 @@ export function getOneProduct(req, res, next) {
     .catch(next);
 }
 
-export function createProduct(req, res, next) {
+function createProduct(req, res, next) {
   // Si el usuario esta registrado y crea el producto me traigo estos datos
   const { name, description, stock, price, img, category } = req.body;
   return Product.create({
@@ -45,7 +35,7 @@ export function createProduct(req, res, next) {
     .catch(next);
 }
 
-export function editProduct(req, res, next) {
+function editProduct(req, res, next) {
   const { id } = req.params;
   const { name, description, stock, price, img, category } = req.body;
 
@@ -66,7 +56,7 @@ export function editProduct(req, res, next) {
     .catch(next);
 }
 
-export function deleteProduct(req, res, next) {
+function deleteProduct(req, res, next) {
   const { id } = req.params;
 
   Product.destroy({
@@ -75,3 +65,10 @@ export function deleteProduct(req, res, next) {
     .catch(next);
 }
 
+module.exports = {
+  getProducts,
+  getOneProduct,
+  createProduct,
+  editProduct,
+  deleteProduct
+};
