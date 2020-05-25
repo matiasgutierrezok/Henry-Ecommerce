@@ -1,4 +1,4 @@
-const { Product } = require('models/product.js');
+//const { Product } = require('models/product.js');
 
 /**Producto esta formado de 
     ID: id
@@ -44,15 +44,12 @@ export function createProduct(req, res, next){
             price,
             img,
             category
-      /*   }).then((createdProduct) =>{ //observacion para cuando haya usuarios (?)
-            return createdProduct.setSeller(products[0].dataValues.createdBy)
-        }) */
-    }).then((result) => {
-        res.json({
-            message: 'Producto creado',
-            data: result
-        });
-    }).catch(next);
+        }).then((result) => {
+            res.json({
+                message: 'Producto creado',
+                data: result
+            });
+        }).catch(next);
 }
 
 export function editProduct(req, res, next){

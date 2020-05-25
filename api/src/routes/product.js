@@ -9,15 +9,14 @@ server.get('/', getProducts);
 // Get One
 server.get('/:id', getOneProduct);
 
-// Post *Crearnuevo
+// Post Crear nuevo
 server.post('/', createProduct);
 
-// update
+// Put update
 server.put('/', editProduct);
 
-// delete
+// delete eliminar
 server.delete('/', deleteProduct);
-
 
 
 module.exports = server;
