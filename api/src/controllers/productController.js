@@ -1,6 +1,4 @@
-const { Product } = require('models/Product.js')
-
-console.log("Esto es Prod? " + {Product});
+const Product = require('models/Product.js');
 
 function getProducts(req, res, next) {
   return Product.findAll()
@@ -23,21 +21,20 @@ function getOneProduct(req, res, next) {
 
 function createProduct(req, res, next) {
   // Si el usuario esta registrado y crea el producto me traigo estos datos
-  const { name, description, stock, price, img, category } = req.body;
+  const { title, description, price, stock, picture } = req.body;
   return Product.create({
-    name,
+    title,
     description,
-    stock,
     price,
-    img,
-    category,
+    stock,
+    picture
   }).then(result => res.status(201).json(result))
     .catch(next);
 }
 
 function editProduct(req, res, next) {
   const { id } = req.params;
-  const { name, description, stock, price, img, category } = req.body;
+  const { title, description, stock, price, picture } = req.body;
 
   if (!req.body.id) {
     throw new Error('Producto no encontrado.');
@@ -46,12 +43,11 @@ function editProduct(req, res, next) {
   Product.update({
     where: { id },
   }, {
-    name,
+    title,
     description,
     stock,
     price,
-    img,
-    category,
+    picture
   }).then(editedProduct => res.status(202).json(editedProduct))
     .catch(next);
 }
