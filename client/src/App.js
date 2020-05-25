@@ -7,16 +7,15 @@ import CreateProduct from './components/createproduct/CreateProduct.jsx';
 import {BrowserRouter, Route} from "react-router-dom";
 import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
 
+var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
+             {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
+             {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
 
 
 function App() {
   var [todetail, setTodetail] = useState(null);
-  var [arrfiltrado, setArrfiltrado] = useState(null);
+  var [array, setArray] = useState(arr);
 
-
-  var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
-             {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
-             {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
 
   function details (id){
     console.log('skksks');
@@ -26,14 +25,14 @@ function App() {
   function handleFilter (filtro){
     var array = arr.filter((p) => p.category.includes(filtro));
     if (array.length > 0) {
-       setArrfiltrado(array);
+       setArray(array);
     }else{
-       setArrfiltrado(null);
+       setArray(arr);
     }
   }
 
   function removeFilter(){
-    setArrfiltrado(null);
+    setArray(arr);
   }
 
   return (
@@ -46,8 +45,8 @@ function App() {
 
 
             <Route exact path="/product" >
-              {!arrfiltrado && <Board products={arr} details={details} />}
-              {!!arrfiltrado && <Board products={arrfiltrado}  details={details} />}
+              <Board products={array} details={details} />
+
             </Route>
 
             <Route path="/product/:id" >
