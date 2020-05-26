@@ -1,9 +1,14 @@
 .card {
   margin: 20px;
   width: 18rem;
-  border: 1px blue solid;
+  
+  background-color: #282c34;
 }
 
+.iconoClima{
+  display:flex;
+  margin-top: 15px;
+}
 .card-title {
   margin-bottom: 15px;
 }

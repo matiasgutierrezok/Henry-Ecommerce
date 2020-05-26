@@ -12,16 +12,18 @@ export default function ProductCard ({id, title, price, img, details}) {
     return (
       <div className="card">
         <div className="card-body">
-          <div className="col-sm-3 col-md-3 col-lg-3">
-              <img  className="iconoClima" src={img} width="100" height="100" alt="" />
-          </div>
-          <div className="row">
+          
+          <div >
+
+            <div >
+                <img   className="iconoClima" src={img} width="250" height="250" alt="" />
+            </div>
             <h1 className="card-title">{title}</h1>
-            <div className="col-sm-3 col-md-3 col-lg-3">
+            <div className="col-sm-6 col-md-6 col-lg-6">
               <span>Price: </span>
               <span>${price}</span>
             </div>
-            <form className="col-sm-3 col-md-3 col-lg-3">
+            <form className="col-sm-6 col-md-6 col-lg-6">
                 
                 <button onClick={alerta}> <Link to={"/product/"+id}>Detalles </Link></button>
               

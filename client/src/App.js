@@ -8,8 +8,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
 
 var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
-             {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
-             {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
+           {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
+           {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
 
 
 function App() {
@@ -37,32 +37,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-
-            <Route path="/">
-              <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
-            </Route>
-
-
-            <Route exact path="/product" >
-              <Board products={array} details={details} />
-
-            </Route>
-
-            <Route path="/product/:id" >
-              <ProductDetail {...todetail} />
-            </Route>
-            <Route exact path="/createproduct" >
-               <CreateProduct />
-            </Route>
-            <Route path="/createproduct/:id" component={ModifyProduct}>
-
-            </Route>
-
-
-
-
-
+      <div className='App-header'>
+        <Route path="/">
+          <NavBar  handleFilter={handleFilter} removeFilter={removeFilter} />
+        </Route>
+        <Route exact path="/product" >
+          <Board products={array} details={details} />
+        </Route>
+        <Route path="/product/:id" >
+          <ProductDetail {...todetail} />
+        </Route>
+        <Route exact path="/createproduct" >
+           <CreateProduct />
+        </Route>
+        <Route path="/createproduct/:id" component={ModifyProduct} />
       </div>
     </BrowserRouter>
   );
