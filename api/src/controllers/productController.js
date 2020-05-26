@@ -1,26 +1,19 @@
-const { Product } = require('models/product.js');
+const { Product } = require('models/index');
+console.log(Product);
 
-/**
-    Producto esta formado de
-    ID: id
-    Name: string
-    Description: text
-    Stock: numero mayor que 0
-    Price: numero mayor que 0
-    Img: url
-    Category: array de category
-    createdBy: User (debe estar autenticado/Registrado) idea para version 2
-*/
-
-export function getProducts(req, res, next) {
+function getProducts(req, res, next) {
   return Product.findAll()
     .then(products => res.json(products))
     .catch(next);
 }
 
-export function getOneProduct(req, res, next) {
+function getOneProduct(req, res, next) {
   // Producto de ID especifico
   const { id } = req.params;
+
+  if (!id) {
+    throw new Error('Producto no encontrado.');
+  }
 
   return Product.findOne({
     where: {
@@ -31,47 +24,59 @@ export function getOneProduct(req, res, next) {
     .catch(next);
 }
 
-export function createProduct(req, res, next) {
+function createProduct(req, res, next) {
   // Si el usuario esta registrado y crea el producto me traigo estos datos
-  const { name, description, stock, price, img, category } = req.body;
+  const { title, description, price, stock, picture } = req.body;
+  
   return Product.create({
-    name,
+    title,
     description,
-    stock,
     price,
-    img,
-    category,
+    stock,
+    picture
   }).then(result => res.status(201).json(result))
     .catch(next);
 }
 
-export function editProduct(req, res, next) {
+function editProduct(req, res, next) {
   const { id } = req.params;
-  const { name, description, stock, price, img, category } = req.body;
+  const { title, description, stock, price, picture } = req.body;
 
-  if (!req.body.id) {
+  if (!id) {
     throw new Error('Producto no encontrado.');
   }
 
   Product.update({
-    where: { id },
-  }, {
-    name,
+    title,
     description,
     stock,
     price,
-    img,
-    category,
-  }).then(editedProduct => res.status(202).json(editedProduct))
+    picture
+  },{
+    where: { id },
+  }).then(editedProduct => 
+    res.status(202).json(editedProduct))
     .catch(next);
 }
 
-export function deleteProduct(req, res, next) {
+function deleteProduct(req, res, next) {
   const { id } = req.params;
 
+  if (!id) {
+    throw new Error('Producto no encontrado.');
+  }
+
   Product.destroy({
-    where: { id },
-  }).then(result => res.status(204).json(result))
+    where: { id }
+  }).then(result => 
+    res.status(204).json(result))
     .catch(next);
 }
 
+module.exports = {
+  getProducts,
+  getOneProduct,
+  createProduct,
+  editProduct,
+  deleteProduct
+};

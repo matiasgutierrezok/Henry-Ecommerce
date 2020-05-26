@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import './CreateProduct.css'
 
 
 export default function CreateProduct () {
@@ -14,7 +14,7 @@ export default function CreateProduct () {
 
     return (
       <div>
-          <form name="myForm"  onSubmit={enviar} >
+          <form className='myform' name="myForm"  onSubmit={enviar} >
             Title: <input type="text" name="ftitle" value={newProduct.title} onChange={e => setNewProduct({...newProduct, title: e.target.value})}/> <br/>
             Price: <input type="text" name="fprice" value={newProduct.price} onChange={e => setNewProduct({...newProduct, price: e.target.value})}/> <br/>
             Stock: <input type="text" name="fstock" value={newProduct.stock} onChange={e => setNewProduct({...newProduct, stock: e.target.value})}/> <br/>

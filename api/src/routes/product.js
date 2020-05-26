@@ -13,10 +13,10 @@ server.get('/:id', getOneProduct);
 server.post('/', createProduct);
 
 // Put update
-server.put('/', editProduct);
+server.put('/:id', editProduct);
 
 // delete eliminar
-server.delete('/', deleteProduct);
+server.delete('/:id', deleteProduct);
 
 
 module.exports = server;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-
+import './NavBar.css'
 
 export default function NavBar ({handleFilter, removeFilter}) {
     
@@ -24,13 +24,13 @@ export default function NavBar ({handleFilter, removeFilter}) {
         </span>
         <ul >
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className='.App-link'>Home</Link>
           </li>
           <li>
-            <Link to="/product">Productos</Link>
+            <Link to="/product" className='.App-link'>Productos</Link>
           </li>
           <li>
-            <Link to="/createproduct">Create product</Link>
+            <Link to="/createproduct" className='.App-link'>Create product</Link>
           </li>
         </ul>
         <form id='formulario' className="form-inline my-2 my-lg-0" onSubmit={onSubmit}>
