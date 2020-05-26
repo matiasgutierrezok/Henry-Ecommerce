@@ -1,4 +1,4 @@
-const Product = require('models/Product.js');
+const { Product } = require('models/index.js');
 
 function getProducts(req, res, next) {
   return Product.findAll()
