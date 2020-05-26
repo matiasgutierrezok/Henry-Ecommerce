@@ -1,4 +1,5 @@
-const Product = require('models/Product.js');
+const { Product } = require('models/index');
+console.log(Product);
 
 function getProducts(req, res, next) {
   return Product.findAll()
@@ -9,6 +10,10 @@ function getProducts(req, res, next) {
 function getOneProduct(req, res, next) {
   // Producto de ID especifico
   const { id } = req.params;
+
+  if (!id) {
+    throw new Error('Producto no encontrado.');
+  }
 
   return Product.findOne({
     where: {
@@ -22,6 +27,7 @@ function getOneProduct(req, res, next) {
 function createProduct(req, res, next) {
   // Si el usuario esta registrado y crea el producto me traigo estos datos
   const { title, description, price, stock, picture } = req.body;
+  
   return Product.create({
     title,
     description,
@@ -36,28 +42,34 @@ function editProduct(req, res, next) {
   const { id } = req.params;
   const { title, description, stock, price, picture } = req.body;
 
-  if (!req.body.id) {
+  if (!id) {
     throw new Error('Producto no encontrado.');
   }
 
   Product.update({
-    where: { id },
-  }, {
     title,
     description,
     stock,
     price,
     picture
-  }).then(editedProduct => res.status(202).json(editedProduct))
+  },{
+    where: { id },
+  }).then(editedProduct => 
+    res.status(202).json(editedProduct))
     .catch(next);
 }
 
 function deleteProduct(req, res, next) {
   const { id } = req.params;
 
+  if (!id) {
+    throw new Error('Producto no encontrado.');
+  }
+
   Product.destroy({
-    where: { id },
-  }).then(result => res.status(204).json(result))
+    where: { id }
+  }).then(result => 
+    res.status(204).json(result))
     .catch(next);
 }
 
