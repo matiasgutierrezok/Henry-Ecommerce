@@ -16,7 +16,7 @@ export default function ProductCard ({id, title, price, img, details}) {
           <div >
 
             <div >
-                <img   className="iconoClima" src={img} width="250" height="250" alt="" />
+                <img className="iconoClima" src={img} width="250" height="250" alt="" />
             </div>
             <h1 className="card-title">{title}</h1>
             <div className="col-sm-6 col-md-6 col-lg-6">
