@@ -9,26 +9,26 @@ export default function ProductDetail({id, title, price, description, stock, cat
         <div className="container">
           <h1 >{title}</h1>
           <div>
-          	<div className="col-sm-2 col-md-4 col-lg-4">
+          	<div >
               <img src={img} width="80" height="80" alt="" />
             </div>
-            <div className="col-sm-2 col-md-2 col-lg-2">
+            <div >
               <span>Price: </span>
               <span>${price}</span>
             </div>
-            <div className="col-sm-2 col-md-2 col-lg-2">
+            <div >
               <span>Stock: </span>
               <span>{stock}</span>
             </div>
-            <div className="col-sm-2 col-md-2 col-lg-2">
+            <div >
               <span>Categorias: </span>
               <span>{category + " "}</span>
             </div>
-            <div className="col-sm-2 col-md-2 col-lg-2">
+            <div >
               <span>Description: </span>
               <span>{description}</span>
             </div>
-            <div className="col-sm-2 col-md-2 col-lg-2">
+            <div >
              
               <button > <Link to="/product">Return to products </Link></button>
               <button > <Link to={"/createproduct/" + id}>Modify product </Link></button>

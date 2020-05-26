@@ -1,0 +1,30 @@
+#logoHenry {
+  margin-right: 20px;
+}
+
+.navbar-brand {
+	display: flex;
+	flex-direction: row;
+	color:green; 
+	font-weight:bold; 
+	text-decoration: underline; 
+	font-style: italic;
+}
+.navbar{
+	
+    
+}
+.navbar-brand h2 {
+	display: flex;
+	margin-bottom: 0px;
+	font-size: 22px;
+}
+#logoHenry {
+	width: 30px;
+	height: 30px;
+}
+
+#formulario {
+	display: flex;
+	margin-left: auto;
+}

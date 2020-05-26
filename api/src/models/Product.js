@@ -1,3 +1,4 @@
+
 const Product = (db, Sequelize) => {
     const P = db.define('product', {
         id: {
