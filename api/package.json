@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=./src nodemon -L",
+    "start": "cross-env NODE_PATH=./src nodemon -L",
     "forever": "NODE_PATH=./src forever index.js",
     "test": "NODE_PATH=./src mocha -w ./tests/**/*.spec.js",
     "testOne": "NODE_PATH=./src mocha -w"
@@ -16,12 +16,12 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "ioredis": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.2.1",
     "pg-native": "^3.0.0",
-    "sequelize": "^5.21.9",
-    "ioredis": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "sequelize": "^5.21.9"
   },
   "devDependencies": {
     "supertest-session": "^4.0.0",
