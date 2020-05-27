@@ -20,22 +20,32 @@ function getOneProduct(req, res, next) {
 }
 
 function getProductsPaged(req, res, next){
-  //Define la offset("compensador") y el limite en 0 y 9 respectivamente.
+  //Define offset("compensador") en 0 y el limite en 100.
   let offset = 0;
   let limit = 10;
 
+  //findAndCountAll crea 2 instancias count(entero - cantidad de coincidencias con la query) y row(array - coincidencias obtenidas)
   Product.findAndCountAll()
   .then((data) => {
+    //posicion de la ruta en pagina /1, /2, etc. Segun corresponda.
     let page = req.params.page;
-    //findAndCountAll crea 2 instancias count(entero - cantidad de coincidencias con la query) y row(array - coincidencias obtenidas)
-    let pages = Math.ceil(data.count / limit)
-    offset = limit * (page - 1)
+    let listedData = data.count;
+    let pages = Math.ceil(listedData / limit);
+    //gestion de error a mejorar, rompe un poco la db pero cumple con su funcion.
+    if (page > pages || page < 1) {
+      throw new Error('Producto fuera de rango.');
+    }
+    offset = limit * (page - 1);
 
     Product.findAll({
       limit,
       offset,
       $sort: { id: 1}
-    }).then(result => res.status(201).json(result))
+    }).then(result => res.status(201).json({
+      result,
+      totalPages: Math.ceil(listedData / limit),
+      currentPage: page
+    }))
   }).catch(next);
 
 }
