@@ -3,17 +3,18 @@ const { cart } = require('models/index.js');
 
 function createCart(req, res, next) {
   // Si el usuario agrega productos al carrito, traigo esos datos
-  const { id user, id cart } = req.body;
+  const { idUser, idCart } = req.body;
   return Cart.create({
-    id user,
-    id cart
+    idUser,
+    idCart
   }).then(result => res.status(201).json(result))
     .catch(next);
 }
+ const cartPrueba = ["zapatilla", "Cantidad:1", "$500", "Disponibles: 99",];
 
-function getProducts(req, res, next) {
-  return Product.findAll()
-    .then(products => res.json(products))
+function getCart(req, res, next) {
+  return cartPrueba = []
+    .then(products => res.json(cartPrueba))
     .catch(next);
 }
 
@@ -30,7 +31,7 @@ function getOneProduct(req, res, next) {
     .catch(next);
 }
 
-function editProduct(req, res, next) {
+function editQuantity(req, res, next) {
   const { id } = req.params;
   const { title, description, stock, price, picture } = req.body;
 
@@ -50,7 +51,16 @@ function editProduct(req, res, next) {
     .catch(next);
 }
 
-function deleteProduct(req, res, next) {
+function deleteItem(req, res, next) {
+  const { id } = req.params;
+
+  Product.destroy({
+    where: { id },
+  }).then(result => res.status(204).json(result))
+    .catch(next);
+}
+
+function deleteAll(req, res, next) {
   const { id } = req.params;
 
   Product.destroy({
@@ -61,8 +71,8 @@ function deleteProduct(req, res, next) {
 
 module.exports = {
   createCart,
-  getProducts,
-  getOneProduct,
-  editProduct,
-  deleteProduct
+  getCart,
+  editQuantity,
+  deleteItem,
+  deleteAll
 };
