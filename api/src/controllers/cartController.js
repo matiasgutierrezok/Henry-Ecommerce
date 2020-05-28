@@ -29,7 +29,6 @@ function getCart(req, res, next) {
 
 // // PUT: para editar la cantidad de un producto
 // server.put('/', editQuantity);
-// function editProduct(req, res, next) {
 function editQuantity(req, res, next) {
   const { id } = req.params;
   const { quantity } = req.body;
@@ -49,8 +48,18 @@ function editQuantity(req, res, next) {
 
 // // DELETE '/:productID': para eliminar un productos
 // server.delete('/:productID', deleteItem);
-// function deleteProduct(req, res, next) {
 function deleteItem(req, res, next) {
+  const { id } = req.params;
+
+  Product.destroy({
+    where: { id },
+  }).then(result => res.status(204).json(result))
+    .catch(next);
+}
+
+// // DELETE '/' Vaciar: Elimina todos los items del carrito
+// server.delete('/vaciar', deleteAll);
+function deleteAll(req, res, next) {
   const { id } = req.params;
 
   Cart.destroy({
@@ -60,11 +69,6 @@ function deleteItem(req, res, next) {
   }).then(result => res.status(204).json(result))
     .catch(next);
 }
-
-// // DELETE '/' Vaciar: Elimina todos los items del carrito
-// server.delete('/vaciar', deleteAll);
-
-
 
 module.exports = {
   createCart,

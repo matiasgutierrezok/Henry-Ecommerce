@@ -11,7 +11,7 @@ server.get('/', getCart);
 // PUT: para editar la cantidad de un producto
 server.put('/', editQuantity);
 
-// DELETE '/:productID': para eliminar un productos
+// DELETE ‘/:productID’: para eliminar un producto
 server.delete('/:productID', deleteItem);
 
 // DELETE '/' Vaciar: Elimina todos los items del carrito
