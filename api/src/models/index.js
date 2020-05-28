@@ -18,7 +18,8 @@ fs.readdirSync(__dirname)
 const {
   User,
   Product,
-  Categories
+  Categories,
+  Cart
 } = models;
 
 // Add model relationships here
@@ -30,5 +31,9 @@ Product.belongsToMany(Categories, {
 Categories.belongsToMany(Product, {
   through: 'categoriesAssociation'
 })
+User.hasOne(Carrito);
+Cart.hasMany(Products);
+// cómo debería ser la relacion carrito/productos?
+// mi único dato de asociación es productId en el array de items
 
 module.exports = models;
