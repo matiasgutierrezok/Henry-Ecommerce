@@ -19,7 +19,8 @@ const {
   User,
   Product,
   Categories,
-  Cart
+  Cart,
+  Cart_Item
 } = models;
 
 // Add model relationships here
@@ -27,12 +28,19 @@ const {
 Product.belongsTo(User, { as: 'author' });
 Product.belongsToMany(Categories, {
   through: 'categoriesAssociation'
-})
+});
 Categories.belongsToMany(Product, {
   through: 'categoriesAssociation'
-})
-User.hasOne(Cart);
+});
+
 Cart.belongsTo(User);
+User.hasOne(Cart);
+Cart.belongsToMany(Product, { through: Cart_Item });
+Product.belongsToMany(Cart, { through: Cart_Item });
+
+
+
+
 
 // cómo debería ser la relacion carrito/productos?
 // mi único dato de asociación es productId en el array de items
