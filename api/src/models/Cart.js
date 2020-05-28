@@ -1,5 +1,5 @@
 const Cart = (db, Sequelize) => {
-    const C = db.define('product', {
+    const C = db.define('cart', {
         idCart: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -8,7 +8,7 @@ const Cart = (db, Sequelize) => {
         },
         idUser: {
             type: Sequelize.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         // items debería ser un array de objetos
         // [{
@@ -19,11 +19,16 @@ const Cart = (db, Sequelize) => {
         //     productId: 346,
         //     quantity: 5,
         // }]
-        items: {
-            type: Sequelize.ENUM,
-            // debería empezar como un array vacío
+        idProducts: {
+            type: Sequelize.ARRAY(Sequelize.INTEGER),
+            defaultValue: [],// debería empezar como un array vacío
             allowNull: false,
         },
+        quantityProduct: {
+            type: Sequelize.ARRAY(Sequelize.INTEGER),
+            defaultValue: [],// debería empezar como un array vacío
+            allowNull: false,
+        }
         // Example:
         // DataTypes.ENUM('value', 'another value')
         // DataTypes.ENUM(['value', 'another value'])

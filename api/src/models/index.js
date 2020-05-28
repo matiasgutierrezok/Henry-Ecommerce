@@ -31,8 +31,9 @@ Product.belongsToMany(Categories, {
 Categories.belongsToMany(Product, {
   through: 'categoriesAssociation'
 })
-User.hasOne(Carrito);
-Cart.hasMany(Products);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
 // cómo debería ser la relacion carrito/productos?
 // mi único dato de asociación es productId en el array de items
 
