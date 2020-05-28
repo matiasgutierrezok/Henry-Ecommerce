@@ -1,22 +1,20 @@
 const server = require('express').Router();
 
-const { createCart, getProducts, getOneProduct, editProduct , deleteProduct } = require('../controllers/cartController.js');
+const { createCart, getCart, editQuantity, deleteItem, deleteAll } = require('../controllers/cartController.js');
 
-
-// Post Crear nuevo
+// POST: agrega un producto y cantidad al carrito.
 server.post('/', createCart);
 
-// Get Todos
-server.get('/', getProducts);
+// GET: devuelve un arreglo con items del carrito
+server.get('/', getCart);
 
-// Get One
-server.get('/:id', getOneProduct);
+// PUT: para editar la cantidad de un producto
+server.put('/', editQuantity);
 
-// Put update
-server.put('/', editProduct);
+// DELETE '/:productID': para eliminar un productos
+server.delete('/:productID', deleteItem);
 
-// delete eliminar
-server.delete('/', deleteProduct);
-
+// DELETE '/' Vaciar: Elimina todos los items del carrito
+server.delete('/vaciar', deleteAll);
 
 module.exports = server;

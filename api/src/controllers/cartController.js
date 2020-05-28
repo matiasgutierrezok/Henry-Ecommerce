@@ -1,68 +1,75 @@
-const { cart } = require('models/index.js');
-// El usuario agrega uno o más productos al carrito, lo cual crea un carrito. Condicional: la cantidad agregada debe ser menor o igual al stock disponible
+const { Cart } = require('models/index.js');
 
+// // POST: agrega un producto y cantidad al carrito.
+// server.post('/', createCart);
 function createCart(req, res, next) {
-  // Si el usuario agrega productos al carrito, traigo esos datos
-  const { id user, id cart } = req.body;
+  const { idCart, idUser } = req.params;
   return Cart.create({
-    id user,
-    id cart
+    idCart,
+    idUser,
+    // itemsArray,
   }).then(result => res.status(201).json(result))
     .catch(next);
-}
+};
 
-function getProducts(req, res, next) {
-  return Product.findAll()
-    .then(products => res.json(products))
-    .catch(next);
-}
+    // esto debería ser un array de items ??
+    // [{idProducto, quantity}, {idProducto, quantity}]
 
-function getOneProduct(req, res, next) {
-  // Producto de ID especifico
+// // GET: devuelve un arreglo con items del carrito
+// server.get('/', getCart);
+function getCart(req, res, next) { 
   const { id } = req.params;
-
-  return Product.findOne({
+  return Cart.findOne({
     where: {
-      // id de busqueda
       id,
     },
-  }).then(product => res.json(product))
+  }).then(cart => res.json(cart))
     .catch(next);
-}
+};
 
-function editProduct(req, res, next) {
+// // PUT: para editar la cantidad de un producto
+// server.put('/', editQuantity);
+// function editProduct(req, res, next) {
+function editQuantity(req, res, next) {
   const { id } = req.params;
-  const { title, description, stock, price, picture } = req.body;
+  const { quantity } = req.body;
 
-  if (!req.body.id) {
-    throw new Error('Producto no encontrado.');
+  if (quantity > req.body.stock) {
+    throw new Error('No hay suficiente stock de este producto');
   }
 
-  Product.update({
+  Cart.update({
     where: { id },
   }, {
-    title,
-    description,
-    stock,
-    price,
-    picture
-  }).then(editedProduct => res.status(202).json(editedProduct))
+    // find item and edit quantity
+    // stock - quantity
+  }).then(editedQuantity => res.status(202).json(editedQuantity))
     .catch(next);
 }
 
-function deleteProduct(req, res, next) {
+// // DELETE '/:productID': para eliminar un productos
+// server.delete('/:productID', deleteItem);
+// function deleteProduct(req, res, next) {
+function deleteItem(req, res, next) {
   const { id } = req.params;
 
-  Product.destroy({
+  Cart.destroy({
     where: { id },
+  }, {
+    // entrar al array?
   }).then(result => res.status(204).json(result))
     .catch(next);
 }
 
+// // DELETE '/' Vaciar: Elimina todos los items del carrito
+// server.delete('/vaciar', deleteAll);
+
+
+
 module.exports = {
   createCart,
-  getProducts,
-  getOneProduct,
-  editProduct,
-  deleteProduct
+  getCart,
+  editQuantity,
+  deleteItem,
+  deleteAll
 };
