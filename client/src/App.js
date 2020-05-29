@@ -1,64 +1,82 @@
 import React, {useState, useEffect} from 'react';
+import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
+
 import ProductDetail from './components/product/ProductDetail.jsx';
 import Board from './components/board/Board.jsx';
 import NavBar from './components/navbar/NavBar.jsx';
 import CreateProduct from './components/createproduct/CreateProduct.jsx';
-import {BrowserRouter, Route} from "react-router-dom";
 import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
-
-var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
-           {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
-           {id: 3, title: 'tres', price:'1500',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["pelota", "basquet"], img:'https://teorico.net/images/test-dgt-1.png'}];
+import Pagination from './components/pagination/pagination.jsx'
 
 
 function App() {
-  var [todetail, setTodetail] = useState(null);
+  var [toDetail, setToDetail] = useState(null);
   var [array, setArray] = useState([]);
+  var [page, setPage] = useState(1);
+  var [totalPages, setTotalPages ] = useState(1);
 
+  useEffect(() => {
+      fetch(`http://localhost:4000/product/paged/${page}`, {
+        method: 'GET'
+      },console.log("Fetch")).then(response =>
+        response.json())
+        .then(results => {
+          //console.log('Success:', results.data);
+          setArray(results.data);
+          setPage(results.currentPage);
+          setTotalPages(results.totalPages);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        })
+    },[page]);
+
+  //leer al final de ver que hace paginacion para mayor comprension.
+  const paginate = pageNumber => setPage(pageNumber);
 
   function details (id){
-    setTodetail(arr.filter((p) =>
+    setToDetail(array.filter((p) =>
      p.id === id)[0]
     )}
 
-  useEffect(() => {
-    fetch('http://localhost:3000/product', {
-      method: 'GET'
-    }).then(response =>
-      response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    })
-  },[])
 
   function handleFilter (filtro){
-    var array = arr.filter((p) => p.category.includes(filtro));
-    if (array.length > 0) {
-       setArray(array);
+    let pivot = array.filter((p) => p.category.includes(filtro));
+    if (pivot.length > 0) {
+       setArray(pivot);
     }else{
-       setArray(arr);
-    }
+       setArray(array);
+    };
+
+    // var array = arr.filter((p) => p.category.includes(filtro));
+    // if (array.length > 0) {
+    //    setArray(array);
+    // }else{
+    //    setArray(arr);
+    // }
   }
 
   function removeFilter(){
-    setArray(arr);
+    setArray(array);
   }
 
   return (
     <BrowserRouter>
       <div className='App-header'>
         <Route path="/">
-          <NavBar  handleFilter={handleFilter} removeFilter={removeFilter} />
+          <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
         </Route>
         <Route exact path="/product" >
-          <Board products={array} details={details} />
+          <Pagination
+            pageEnd= { totalPages }
+            paginate = { paginate }/>
+          <Board
+            products={array}
+            details={details}/>
         </Route>
         <Route path="/product/:id" >
-          <ProductDetail {...todetail} />
+          <ProductDetail {...toDetail} />
         </Route>
         <Route exact path="/createproduct" >
            <CreateProduct />

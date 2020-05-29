@@ -41,8 +41,8 @@ function getProductsPaged(req, res, next){
       limit,
       offset,
       $sort: { id: 1}
-    }).then(result => res.status(201).json({
-      result,
+    }).then(data => res.status(201).json({
+      data,
       totalPages: Math.ceil(listedData / limit),
       currentPage: page
     }))
