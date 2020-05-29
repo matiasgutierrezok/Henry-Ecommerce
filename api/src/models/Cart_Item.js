@@ -7,7 +7,10 @@ const Cart_Item = (db, Sequelize) => {
     	},
     	quantity: {
     		type: Sequelize.INTEGER,
-    		allowNull: false
+    		allowNull: false,
+            validate: {
+                min: 0
+            }
     	}
     });
     return C;
