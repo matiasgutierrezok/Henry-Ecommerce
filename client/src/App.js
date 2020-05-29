@@ -6,6 +6,7 @@ import NavBar from './components/navbar/NavBar.jsx';
 import CreateProduct from './components/createproduct/CreateProduct.jsx';
 import {BrowserRouter, Route} from "react-router-dom";
 import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
+import SearchBar from './components/searchbar/SearchBar.jsx';
 
 var arr = [{id: 1, title: 'uno', price:'500', description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["zapatilla", "futbol"], img:'https://teorico.net/images/test-dgt-1.png'},
            {id: 2, title: 'dos', price:'1000',description:"akjshakjsfkasbdmnabsdkjaskdjasmd,nb", stock:"23",category:["remera", "handball"], img:'https://teorico.net/images/test-dgt-1.png'},
@@ -47,12 +48,15 @@ function App() {
   function removeFilter(){
     setArray(arr);
   }
+    function handleKeyword(keyword) {
+    console.log('test handler' + keyword);
+  }
 
   return (
     <BrowserRouter>
       <div className='App-header'>
         <Route path="/">
-          <NavBar  handleFilter={handleFilter} removeFilter={removeFilter} />
+          <NavBar  handleKeyword={handleKeyword} />
         </Route>
         <Route exact path="/product" >
           <Board products={array} details={details} />

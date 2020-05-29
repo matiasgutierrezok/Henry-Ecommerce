@@ -1,4 +1,12 @@
-#logoHenry {
+#brand{
+	margin-left: 16px;
+	margin-right: 16px;
+}
+#asd{
+	display: flex;
+	justify-content: space-between;
+}
+/*#logoHenry {
   margin-right: 20px;
 }
 
@@ -27,4 +35,4 @@
 #formulario {
 	display: flex;
 	margin-left: auto;
-}
+}*/
