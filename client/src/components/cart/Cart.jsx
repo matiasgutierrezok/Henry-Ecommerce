@@ -1,24 +1,26 @@
 import React from 'react';
-import './Board.css';
+
+import CartProduct from '../cartproduct/CartProduct.jsx';
 
 
-import ProductCard from '../product-card/ProductCard.jsx';
-
-export default function MyCart({products, details}) {
+export default function MyCart({products, quantity}) {
   
 
 
   return (
-    <div className='cards'>
-      
-      {products.map(c => <ProductCard 
-          id={c.id}
-          title={c.title}
-          price={c.price}
-          img= {c.img}
-          details= {details}
+    <div >
+      <h1>My Cart</h1>
+      {products.map(p => {
+        return <CartProduct 
+                  id={p.id}
+                  title={p.title}
+                  price={p.price}
+                  quantity={quantity}
         />
-      )}
+      })}
+      <button type="button" class="btn btn-lg btn-primary" disabled>Empty Cart</button>
+      <button type="button" class="btn btn-lg btn-primary" disabled>Save Cart</button>
+      <button type="button" class="btn btn-lg btn-primary" disabled>Buy</button>
     </div>
   );
 }
