@@ -1,23 +1,21 @@
 const { Cart } = require('models/index.js');
 
-// // POST: agrega un producto y cantidad al carrito.
+// // POST: crea el carrito
 // server.post('/', createCart);
 function createCart(req, res, next) {
-  const { idCart, idUser } = req.params;
-  return Cart.create({
-    idCart,
-    idUser,
-    // itemsArray,
-  }).then(result => res.status(201).json(result))
+  const { idUser } = req.params;
+  // busco a mi usuario con su primaryKey
+  return User.findByPk(idUser)
+    .then(value => {
+      Cart.create({ id })
+    })
+    .then(result => res.status(201).json(result))
     .catch(next);
 };
 
-    // esto debería ser un array de items ??
-    // [{idProducto, quantity}, {idProducto, quantity}]
-
 // // GET: devuelve un arreglo con items del carrito
 // server.get('/', getCart);
-function getCart(req, res, next) { 
+function getCart(req, res, next) {
   const { id } = req.params;
   return Cart.findOne({
     where: {

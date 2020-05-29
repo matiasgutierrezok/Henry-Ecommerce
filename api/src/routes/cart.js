@@ -6,15 +6,15 @@ const { createCart, getCart, editQuantity, deleteItem, deleteAll } = require('..
 server.post('/', createCart);
 
 // GET: devuelve un arreglo con items del carrito
-server.get('/', getCart);
+server.get('/:cartId', getCart);
 
 // PUT: para editar la cantidad de un producto
-server.put('/', editQuantity);
+server.put('/:cartId', editQuantity);
 
 // DELETE ‘/:productID’: para eliminar un producto
-server.delete('/:productID', deleteItem);
+server.delete('/:productId', deleteItem);
 
 // DELETE '/' Vaciar: Elimina todos los items del carrito
-server.delete('/vaciar', deleteAll);
+server.delete('/', deleteAll);
 
 module.exports = server;
