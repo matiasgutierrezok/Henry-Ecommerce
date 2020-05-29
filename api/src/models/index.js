@@ -26,10 +26,14 @@ const {
 Product.belongsTo(User, { as: 'author' });
 Product.belongsToMany(Categories, {
   through: 'categoriesAssociation'
-})
+});
 Categories.belongsToMany(Product, {
   through: 'categoriesAssociation'
-})
-//Cart.belongsTo(User, { as: 'author'});
+});
+
+Cart.belongsTo(User);
+User.hasOne(Cart);
+Cart.belongsToMany(Product, { through: Cart_Item });
+Product.belongsToMany(Cart, { through: Cart_Item });
 
 module.exports = models;
