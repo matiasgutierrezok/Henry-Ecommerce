@@ -22,7 +22,7 @@ function getOneProduct(req, res, next) {
 function getProductsPaged(req, res, next){
   //Define offset("compensador") en 0 y el limite en 100.
   let offset = 0;
-  let limit = 10;
+  let limit = 9;
 
   //findAndCountAll crea 2 instancias count(entero - cantidad de coincidencias con la query) y row(array - coincidencias obtenidas)
   Product.findAndCountAll()
@@ -37,7 +37,7 @@ function getProductsPaged(req, res, next){
     }
     offset = limit * (page - 1);
 
-    Product.findAll({
+    return Product.findAll({
       limit,
       offset,
       $sort: { id: 1}
