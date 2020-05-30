@@ -1,16 +1,46 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './CreateProduct.css'
 
 
 export default function CreateProduct () {
-    var [newProduct, setNewProduct] = useState({title: '', price: '', stock: '', category: '', description: '', image: ''})
-
- 
+    var [newProduct, setNewProduct] = useState({title: '', price: '', stock: '', category: '', description: '', picture: ''});
 
     function enviar (e){
+
+      fetch('http://localhost:4000/product', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "title": newProduct.title,
+          "price": newProduct.price,
+          "stock": newProduct.stock,
+          "category": newProduct.category,
+          "description": newProduct.description,
+          "picture": newProduct.picture
+        }),
+      })
+      .then(response => response.json())
+      .catch(error => {
+          console.error(error);
+      });
       e.preventDefault();
-      console.log(newProduct)
+      resetFields();
     }
+
+    function resetFields(){
+      setNewProduct({
+        title: '',
+        price: '',
+        stock: '',
+        category: '',
+        description: '',
+        picture: ''
+      });
+    }
+
 
     return (
       <div>
@@ -20,11 +50,11 @@ export default function CreateProduct () {
             Stock: <input type="text" name="fstock" value={newProduct.stock} onChange={e => setNewProduct({...newProduct, stock: e.target.value})}/> <br/>
             Category: <input type="text" name="fcategory" value={newProduct.category} onChange={e => setNewProduct({...newProduct, category: e.target.value})}/> <br/>
             Description: <input type="text" name="fdescription" value={newProduct.description} onChange={e => setNewProduct({...newProduct, description: e.target.value})}/> <br/>
-            Image: <input type="text" name="fimage" value={newProduct.image}  onChange={e => setNewProduct({...newProduct, image: e.target.value})}/> <br/>
-   
+            Image: <input type="text" name="fimage" value={newProduct.picture}  onChange={e => setNewProduct({...newProduct, picture: e.target.value})}/> <br/>
+
             <input type="submit" value="Submit" />
-          </form> 
+          </form>
       </div>
     );
-  
+
 }

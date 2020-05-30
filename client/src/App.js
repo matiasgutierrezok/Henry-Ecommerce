@@ -19,10 +19,9 @@ function App() {
   useEffect(() => {
       fetch(`http://localhost:4000/product/paged/${page}`, {
         method: 'GET'
-      },console.log("Fetch")).then(response =>
+      }).then(response =>
         response.json())
         .then(results => {
-          //console.log('Success:', results.data);
           setArray(results.data);
           setPage(results.currentPage);
           setTotalPages(results.totalPages);
@@ -48,13 +47,6 @@ function App() {
     }else{
        setArray(array);
     };
-
-    // var array = arr.filter((p) => p.category.includes(filtro));
-    // if (array.length > 0) {
-    //    setArray(array);
-    // }else{
-    //    setArray(arr);
-    // }
   }
 
   function removeFilter(){
