@@ -42,6 +42,8 @@ export default function CreateProduct () {
     }
 
 
+
+
     return (
       <div>
           <form className='myform' name="myForm"  onSubmit={enviar} >
@@ -52,7 +54,7 @@ export default function CreateProduct () {
             Description: <input type="text" name="fdescription" value={newProduct.description} onChange={e => setNewProduct({...newProduct, description: e.target.value})}/> <br/>
             Image: <input type="text" name="fimage" value={newProduct.picture}  onChange={e => setNewProduct({...newProduct, picture: e.target.value})}/> <br/>
 
-            <input type="submit" value="Submit" />
+            <input className='btnCreacteProduct' type="submit" value="Submit" />
           </form>
       </div>
     );
