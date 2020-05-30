@@ -1,77 +1,83 @@
-const { Cart } = require('models/index.js');
+const { Cart, Product, Cart_Item } = require('models/index.js');
 
 // // POST: crea el carrito
-// server.post('/', createCart);
+// server.post('/:cartID', createCart);
 function createCart(req, res, next) {
-  const { idUser } = req.params;
-  // busco a mi usuario con su primaryKey
-  return User.findByPk(idUser)
-    .then(value => {
-      Cart.create({ id })
+  const { cartId } = req.params;
+
+  return Cart.findByPk(cartId)
+    .then(cart => {
+      if (!cart) {
+        return Cart.create({
+          id: cartId
+        })
+        .then(result => res.status(201).json(result))
+      } else {
+        res.status(200).json(cart);
+      }
     })
-    .then(result => res.status(201).json(result))
     .catch(next);
 };
 
 // // GET: devuelve un arreglo con items del carrito
-// server.get('/', getCart);
+// server.get('/:cartID', getCart);
 function getCart(req, res, next) {
-  const { id } = req.params;
+  const { cartId } = req.params;
   return Cart.findOne({
     where: {
-      id,
+      id: cartId,
     },
   }).then(cart => res.json(cart))
     .catch(next);
 };
 
-// // PUT: para editar la cantidad de un producto
-// server.put('/', editQuantity);
-function editQuantity(req, res, next) {
-  const { id } = req.params;
-  const { quantity } = req.body;
+// // // PUT: para editar la cantidad de un producto
+// // server.put('/:cartId', editQuantity);
+// function editQuantity(req, res, next) {
+//   const { cartId } = req.params;
+//   const { quantity } = req.body;
 
-  if (quantity > req.body.stock) {
-    throw new Error('No hay suficiente stock de este producto');
-  }
+//   if (stock < quantity) {
+//     throw new Error('No hay suficiente stock de este producto');
+//   }
 
-  Cart.update({
-    where: { id },
-  }, {
-    // find item and edit quantity
-    // stock - quantity
-  }).then(editedQuantity => res.status(202).json(editedQuantity))
-    .catch(next);
-}
+//   Cart_Item.update({
+//     where: { cartId },
+//   }, {
+//     quantity,
+//   }).then(editedQuantity => res.status(202).json(editedQuantity))
+//     .catch(next);
+// }
 
-// // DELETE '/:productID': para eliminar un productos
-// server.delete('/:productID', deleteItem);
-function deleteItem(req, res, next) {
-  const { id } = req.params;
+// // // DELETE '/:itemID': para eliminar un productos
+// // server.delete('/:cartID', deleteItem);
+// function deleteItem(req, res, next) {
+//   const { cartId } = req.params;
 
-  Product.destroy({
-    where: { id },
-  }).then(result => res.status(204).json(result))
-    .catch(next);
-}
+//   Cart_Item.destroy({
+//     where: { cartId },
+//   }).then(result => res.status(204).json(result))
+//     .catch(next);
+// }
 
-// // DELETE '/' Vaciar: Elimina todos los items del carrito
-// server.delete('/vaciar', deleteAll);
-function deleteAll(req, res, next) {
-  const { id } = req.params;
+// // // DELETE '/' Vaciar: Elimina todos los items del carrito
+// // server.delete('/:cartId', deleteAll);
+// function deleteAll(req, res, next) {
+//   const { id } = req.params;
 
-  Cart.destroy({
-    where: { id },
-  }, {
-    // entrar al array?
-  }).then(result => res.status(204).json(result))
-    .catch(next);
-}
+//   // findAll() ??
+//   Cart.destroy({
+//     where: { id },
+//   }, {
+//     // entrar al array?
+//   }).then(result => res.status(204).json(result))
+//     .catch(next);
+// }
 
 module.exports = {
   createCart,
   getCart,
-  editQuantity,
-  deleteItem,
-  deleteAll
+  //editQuantity,
+  //deleteItem,
+  //deleteAll
 };
