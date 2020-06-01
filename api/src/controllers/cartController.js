@@ -8,10 +8,8 @@ function createCart(req, res, next) {
   return Cart.findByPk(cartId)
     .then(cart => {
       if (!cart) {
-        return Cart.create({
-          id: cartId
-        })
-        .then(result => res.status(201).json(result))
+        return Cart.create({ id: cartId })
+          .then(result => res.status(201).json(result))
       } else {
         res.status(200).json(cart);
       }
@@ -23,13 +21,73 @@ function createCart(req, res, next) {
 // server.get('/:cartID', getCart);
 function getCart(req, res, next) {
   const { cartId } = req.params;
-  return Cart.findOne({
-    where: {
-      id: cartId,
-    },
-  }).then(cart => res.json(cart))
+  return Cart.findOne({ where: { id: cartId } })
+    .then(cart => res.json(cart))
     .catch(next);
 };
+
+// // PUT: agrega un producto al carrito
+// server.put('/:productId', editQuantity);
+function addProduct(req, res, next) {
+  const { cartId } = req.params;
+  const { productId, quantity } = req.body;
+
+  let product_id = null
+  // 
+  Product.findOne({ where: { id: productId } })
+    .then(product => {
+      product_id = product.id
+    })
+
+  Cart.findByPk(cartId)
+    .then(c => {
+      let cart;
+      c.getCart() // getting the cart
+        .then(c => {
+          cart = c; // assigning for later use
+          return c.getProducts({ where: { id: product_id } }) // returning all the products in the cart
+        })
+        .then(products => {
+          let product = null;
+          if (products.length > 0) { // select one product
+            product = products[0];
+          }
+
+          // let quantity = 1 // the quantity set to one
+          if (product) { // if product exits
+            // get the current quantity
+            // add one to it
+            // add the same object of product model to the cart
+            Cart_Item
+              .findOne({ productId: product.id, cartId: cart.id })
+              .then(item => {
+                let oldQuantity = item.quantity;
+                quantity = oldQuantity + 1;
+                cart.addProduct(product, { through: { quantity } })
+                  .then(() => console.log("Updated the quantity"))
+                  .catch(console.warn)
+              })
+              .catch(console.warn)
+
+          } else {
+            // find the product by id
+            // add it to the cart through cart item model, setting the quantity
+            Product
+              .findByPk(product_id)
+              .then(product => {
+                cart.addProduct(product, { through: { quantity } })
+                console.log("Added new product");
+              })
+              .catch(console.warn)
+          }
+        })
+        .catch(console.warn)
+    })
+    .catch()
+}
+
+
+
 
 // // // PUT: para editar la cantidad de un producto
 // // server.put('/:cartId', editQuantity);
@@ -77,6 +135,7 @@ function getCart(req, res, next) {
 module.exports = {
   createCart,
   getCart,
+  addProduct,
   //editQuantity,
   //deleteItem,
   //deleteAll

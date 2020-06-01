@@ -7,10 +7,15 @@ const { createCart, getCart,
 // POST: agrega un producto y cantidad al carrito.
 server.post('/:cartId', createCart);
 
-// GET: devuelve un arreglo con items del carrito
+// GET: devuelve el carrito
 server.get('/:cartId', getCart);
 
-// AGREGAR PRODUCTOS AL CARRITO
+// GET: devuelve los productos del carrito
+server.get('/products/:cartId', getCart);
+// ahre que hace lo mismo
+
+// PUT: agrega un producto al carrito
+// server.put('/:cartId', editQuantity);
 
 // // PUT: para editar la cantidad de un producto
 // server.put('/:cartId', editQuantity);
