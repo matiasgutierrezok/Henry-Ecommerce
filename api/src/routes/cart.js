@@ -1,8 +1,6 @@
 const server = require('express').Router();
 
-const { createCart, getCart, addProduct, editQuantity,
-// deleteItem, deleteAll 
-} = require('../controllers/cartController.js');
+const { createCart, getCart, addProduct, editQuantity, deleteItem, deleteAll } = require('../controllers/cartController.js');
 
 // POST: crea el carrito.
 server.post('/:cartId', createCart);
@@ -17,9 +15,9 @@ server.get('/:cartId', getCart);
 server.put('/:cartId', editQuantity);
 
 // // DELETE ‘/:productID’: para eliminar un producto
-// server.delete('/:cartId', deleteItem);
+server.delete('/:cartId', deleteItem);
 
 // // DELETE '/' Vaciar: Elimina todos los items del carrito
-// server.delete('/:cartId', deleteAll);
+server.delete('/deleteAll/:cartId', deleteAll);
 
 module.exports = server;

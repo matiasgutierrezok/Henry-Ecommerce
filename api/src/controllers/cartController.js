@@ -1,7 +1,5 @@
 const { Cart, Product, Cart_Item } = require('models/index.js');
 
-// // POST: crea el carrito
-// server.post('/:cartID', createCart);
 function createCart(req, res, next) {
   const { cartId } = req.params;
 
@@ -17,17 +15,13 @@ function createCart(req, res, next) {
     .catch(next);
 };
 
-// // GET: devuelve un arreglo con items del carrito
-// server.get('/:cartID', getCart);
 function getCart(req, res, next) {
   const { cartId } = req.params;
-  return Cart.findOne({ where: { id: cartId } })
+  return Cart_Item.findOne({ where: { id: cartId } })
     .then(cart => res.json(cart))
     .catch(next);
 };
 
-// // POST: agrega un producto al carrito
-// server.post('/:productId', addProduct);
 function addProduct(req, res, next) {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
@@ -45,103 +39,48 @@ function addProduct(req, res, next) {
     .catch(next)
 }
 
-// // PUT: para editar la cantidad de un producto
-// server.put('/:cartId', editQuantity);
 function editQuantity(req, res, next) {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
 
-  Cart_Item.update({ 
-    where: { productId }, 
-  },{
+  return Cart_Item.update({ 
     quantity
+  },{
+    where: { cartId, productId }   
   }).then(editedQuantity =>
     res.status(202).json(editedQuantity))
     .catch(next);
 }
 
-// Necesito que se sitúe en Cart_Item y que modifique la cantidad
+function deleteItem(req, res, next) {
+  const { cartId } = req.params;
+  const { productId } = req.body;
 
+  return Cart_Item.destroy({
+    where: { cartId, productId }
+  },{
+    productId
+  }).then(deletedItem =>
+    res.status(202).json(deletedItem))
+    .catch(next);
+}
 
+function deleteAll(req, res, next) {
+  const { cartId } = req.params;
 
-// if (products.length > 0) { // select one product
-//   product = products[0];
-// }
-
-// // let quantity = 1 // the quantity set to one
-// if (product) { // if product exits
-//   // get the current quantity
-//   // add one to it
-//   // add the same object of product model to the cart
-//   Cart_Item.findOne({ productId: product.id, cartId: cart.id })
-//     .then(item => {
-//       let oldQuantity = item.quantity;
-//       quantity = oldQuantity + 1;
-//       cart.addProduct(product, { through: { quantity } })
-//         .then(() => console.log("Updated the quantity"))
-//         .catch(console.warn)
-//     })
-//     .catch(console.warn)
-
-// } else {
-//   // find the product by id
-//   // add it to the cart through cart item model, setting the quantity
-//   Product.findByPk(product_id)
-//     .then(product => {
-//       cart.addProduct(product, { through: { quantity } })
-//       console.log("Added new product");
-//     })
-//     .catch(console.warn)
-// }
-
-// // // PUT: para editar la cantidad de un producto
-// // server.put('/:cartId', editQuantity);
-// function editQuantity(req, res, next) {
-//   const { cartId } = req.params;
-//   const { quantity } = req.body;
-
-//   if (stock < quantity) {
-//     throw new Error('No hay suficiente stock de este producto');
-//   }
-
-//   Cart_Item.update({
-//     where: { cartId },
-//   }, {
-//     quantity,
-//   }).then(editedQuantity => res.status(202).json(editedQuantity))
-//     .catch(next);
-// }
-
-// // // DELETE '/:itemID': para eliminar un productos
-// // server.delete('/:cartID', deleteItem);
-// function deleteItem(req, res, next) {
-//   const { cartId } = req.params;
-
-//   Cart_Item.destroy({
-//     where: { cartId },
-//   }).then(result => res.status(204).json(result))
-//     .catch(next);
-// }
-
-// // // DELETE '/' Vaciar: Elimina todos los items del carrito
-// // server.delete('/:cartId', deleteAll);
-// function deleteAll(req, res, next) {
-//   const { id } = req.params;
-
-//   // findAll() ??
-//   Cart.destroy({
-//     where: { id },
-//   }, {
-//     // entrar al array?
-//   }).then(result => res.status(204).json(result))
-//     .catch(next);
-// }
+  return Cart_Item.destroy({
+    where: { cartId }
+  }).then(deletedAll =>
+    res.status(202).json("Carrito vaciado correctamente"))
+    .catch(next);
+}
 
 module.exports = {
   createCart,
   getCart,
   addProduct,
-  //editQuantity,
-  //deleteItem,
-  //deleteAll
+  editQuantity,
+  deleteItem,
+  deleteAll
 };
+
