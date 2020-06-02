@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
+
 import './App.css';
 
 import ProductDetail from './components/product/ProductDetail.jsx';
@@ -71,7 +72,7 @@ function App() {
           <ProductDetail {...toDetail} />
         </Route>
         <Route exact path="/createproduct" >
-           <CreateProduct />
+          <CreateProduct />
         </Route>
         <Route path="/createproduct/:id" component={ModifyProduct} />
       </div>
