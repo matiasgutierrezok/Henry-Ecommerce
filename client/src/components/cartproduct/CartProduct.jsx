@@ -30,3 +30,4 @@ export default function CartProduct ({id, title, price, quantity}) {
       </div>
     );
 };
+
