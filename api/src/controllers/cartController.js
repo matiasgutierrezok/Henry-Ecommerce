@@ -45,46 +45,6 @@ function addProduct(req, res, next) {
     .catch(next)
 }
 
-// if (products.length > 0) { // select one product
-//   product = products[0];
-// }
-
-// // let quantity = 1 // the quantity set to one
-// if (product) { // if product exits
-//   // get the current quantity
-//   // add one to it
-//   // add the same object of product model to the cart
-//   Cart_Item.findOne({ productId: product.id, cartId: cart.id })
-//     .then(item => {
-//       let oldQuantity = item.quantity;
-//       quantity = oldQuantity + 1;
-//       cart.addProduct(product, { through: { quantity } })
-//         .then(() => console.log("Updated the quantity"))
-//         .catch(console.warn)
-//     })
-//     .catch(console.warn)
-
-// } else {
-//   // find the product by id
-//   // add it to the cart through cart item model, setting the quantity
-//   Product.findByPk(product_id)
-//     .then(product => {
-//       cart.addProduct(product, { through: { quantity } })
-//       console.log("Added new product");
-//     })
-//     .catch(console.warn)
-// }
-
-
-  // Book.update(
-  //   {title: req.body.title},
-  //   {where: req.params.bookId}
-  // )
-  // .then(function(rowsUpdated) {
-  //   res.json(rowsUpdated)
-  // })
-  // .catch(next)
-
 // // PUT: para editar la cantidad de un producto
 // server.put('/:cartId', editQuantity);
 function editQuantity(req, res, next) {
