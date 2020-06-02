@@ -26,7 +26,7 @@ function getCart(req, res, next) {
     .catch(next);
 };
 
-// // PUT: agrega un producto al carrito
+// // POST: agrega un producto al carrito
 // server.post('/:productId', addProduct);
 function addProduct(req, res, next) {
   const { cartId } = req.params;
@@ -44,6 +44,25 @@ function addProduct(req, res, next) {
     })
     .catch(next)
 }
+
+// // PUT: para editar la cantidad de un producto
+// server.put('/:cartId', editQuantity);
+function editQuantity(req, res, next) {
+  const { cartId } = req.params;
+  const { productId, quantity } = req.body;
+
+  Cart_Item.update({ 
+    where: { productId }, 
+  },{
+    quantity
+  }).then(editedQuantity =>
+    res.status(202).json(editedQuantity))
+    .catch(next);
+}
+
+// Necesito que se sitúe en Cart_Item y que modifique la cantidad
+
+
 
 // if (products.length > 0) { // select one product
 //   product = products[0];
