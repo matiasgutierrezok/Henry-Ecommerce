@@ -1,6 +1,6 @@
 const server = require('express').Router();
 
-const { createCart, getCart, addProduct
+const { createCart, getCart, addProduct, editQuantity
     //editQuantity, deleteItem, deleteAll 
 } = require('../controllers/cartController.js');
 
@@ -17,8 +17,8 @@ server.get('/products/:cartId', getCart);
 // POST: agrega un producto al carrito
 server.post('/addProduct/:cartId', addProduct);
 
-// // PUT: para editar la cantidad de un producto
-// server.put('/:cartId', editQuantity);
+// PUT: para editar la cantidad de un producto
+server.put('/:cartId', editQuantity);
 
 // // DELETE ‘/:productID’: para eliminar un producto
 // server.delete('/:cartId', deleteItem);
