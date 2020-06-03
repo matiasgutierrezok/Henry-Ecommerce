@@ -17,10 +17,12 @@ function createCart(req, res, next) {
 
 function getCart(req, res, next) {
   const { cartId } = req.params;
-  return Cart_Item.findOne({ where: { id: cartId } })
+  return Cart_Item.findAll({ where: { cartId: cartId } })
     .then(cart => res.json(cart))
     .catch(next);
 };
+
+//Busca todos los productos vinculados al cartId dentro de la tabla Cart_Item
 
 function addProduct(req, res, next) {
   const { cartId } = req.params;
@@ -48,7 +50,7 @@ function editQuantity(req, res, next) {
   },{
     where: { cartId, productId }   
   }).then(editedQuantity =>
-    res.status(202).json(editedQuantity))
+    res.status(202).json("Cambios realizados exitosamente"))
     .catch(next);
 }
 

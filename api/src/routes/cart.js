@@ -8,7 +8,7 @@ server.post('/:cartId', createCart);
 // POST: agrega un producto al carrito y cantidad al carrito.
 server.post('/addProduct/:cartId', addProduct);
 
-// GET: devuelve el carrito
+// GET: devuelve los items dentro de un carrito
 server.get('/:cartId', getCart);
 
 // // PUT: para editar la cantidad de un producto
