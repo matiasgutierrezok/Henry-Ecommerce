@@ -1,7 +1,5 @@
 const { Cart, Product, Cart_Item } = require('models/index.js');
 
-// // POST: crea el carrito
-// server.post('/:cartID', createCart);
 function createCart(req, res, next) {
   const { cartId } = req.params;
 
@@ -17,17 +15,15 @@ function createCart(req, res, next) {
     .catch(next);
 };
 
-// // GET: devuelve un arreglo con items del carrito
-// server.get('/:cartID', getCart);
 function getCart(req, res, next) {
   const { cartId } = req.params;
-  return Cart.findOne({ where: { id: cartId } })
+  return Cart_Item.findAll({ where: { cartId: cartId } })
     .then(cart => res.json(cart))
     .catch(next);
 };
 
-// // PUT: agrega un producto al carrito
-// server.post('/:productId', addProduct);
+//Busca todos los productos vinculados al cartId dentro de la tabla Cart_Item
+
 function addProduct(req, res, next) {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
@@ -45,57 +41,48 @@ function addProduct(req, res, next) {
     .catch(next)
 }
 
-// // PUT: para editar la cantidad de un producto
-// server.put('/:cartId', editQuantity);
 function editQuantity(req, res, next) {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
 
-  // if (stock < quantity) {
-  //   throw new Error('No hay suficiente stock de este producto');
-  // }
-
-  Cart_Item.findOne({
-    where: { cartId },
-  }).then(Item => {
-    return Item.update(
-      { quantity }, 
-      { where: { productId } })
-  })
-    .then(editedQuantity => res.status(202).json(editedQuantity))
+  return Cart_Item.update({ 
+    quantity
+  },{
+    where: { cartId, productId }   
+  }).then(editedQuantity =>
+    res.status(202).json("Cambios realizados exitosamente"))
     .catch(next);
 }
 
-// // // DELETE '/:itemID': para eliminar un productos
-// // server.delete('/:cartID', deleteItem);
-// function deleteItem(req, res, next) {
-//   const { cartId } = req.params;
+function deleteItem(req, res, next) {
+  const { cartId } = req.params;
+  const { productId } = req.body;
 
-//   Cart_Item.destroy({
-//     where: { cartId },
-//   }).then(result => res.status(204).json(result))
-//     .catch(next);
-// }
+  return Cart_Item.destroy({
+    where: { cartId, productId }
+  },{
+    productId
+  }).then(deletedItem =>
+    res.status(202).json(deletedItem))
+    .catch(next);
+}
 
-// // // DELETE '/' Vaciar: Elimina todos los items del carrito
-// // server.delete('/:cartId', deleteAll);
-// function deleteAll(req, res, next) {
-//   const { id } = req.params;
+function deleteAll(req, res, next) {
+  const { cartId } = req.params;
 
-//   // findAll() ??
-//   Cart.destroy({
-//     where: { id },
-//   }, {
-//     // entrar al array?
-//   }).then(result => res.status(204).json(result))
-//     .catch(next);
-// }
+  return Cart_Item.destroy({
+    where: { cartId }
+  }).then(deletedAll =>
+    res.status(202).json("Carrito vaciado correctamente"))
+    .catch(next);
+}
 
 module.exports = {
   createCart,
   getCart,
   addProduct,
   editQuantity,
-  //deleteItem,
-  //deleteAll
+  deleteItem,
+  deleteAll
 };
+
