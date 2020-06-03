@@ -32,6 +32,9 @@ export default function NavBar ({handleFilter, removeFilter}) {
           <li>
             <Link to="/createproduct" className='.App-link'>Create product</Link>
           </li>
+          <li>
+            <Link to="/Cart" className='.App-link'>My Cart</Link>
+          </li>
         </ul>
         <form id='formulario' className="form-inline my-2 my-lg-0" onSubmit={onSubmit}>
           <input className="form-control mr-sm-2" type="search" placeholder="Category filter..." value={filter} onChange={e => setFilter(e.target.value)}/>

@@ -25,7 +25,9 @@ const { conn } = require('./src/models/index.js');
 const port = 4000;
 
 conn.sync({ force: false }).then(() => {
+
   server.listen(port, () => {
     console.log(`%s listening at ${port}`); // eslint-disable-line no-console
+
   });
 });
