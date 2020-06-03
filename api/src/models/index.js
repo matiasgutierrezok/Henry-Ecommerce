@@ -38,11 +38,4 @@ User.hasOne(Cart);
 Cart.belongsToMany(Product, { through: Cart_Item });
 Product.belongsToMany(Cart, { through: Cart_Item });
 
-
-
-
-
-// cómo debería ser la relacion carrito/productos?
-// mi único dato de asociación es productId en el array de items
-
 module.exports = models;

@@ -1,77 +1,87 @@
-const { cart } = require('models/index.js');
-// El usuario agrega uno o más productos al carrito, lo cual crea un carrito. Condicional: la cantidad agregada debe ser menor o igual al stock disponible
+const { Cart, Product, Cart_Item } = require('models/index.js');
 
 function createCart(req, res, next) {
-  // Si el usuario agrega productos al carrito, traigo esos datos
-  const { idUser, idCart } = req.body;
-  return Cart.create({
-    idUser,
-    idCart
-  }).then(result => res.status(201).json(result))
+  const { cartId } = req.params;
+
+  return Cart.findByPk(cartId)
+    .then(cart => {
+      if (!cart) {
+        return Cart.create({ id: cartId })
+          .then(result => res.status(201).json(result))
+      } else {
+        res.status(200).json(cart);
+      }
+    })
     .catch(next);
-}
- const cartPrueba = ["zapatilla", "Cantidad:1", "$500", "Disponibles: 99",];
+};
 
 function getCart(req, res, next) {
-  return cartPrueba = []
-    .then(products => res.json(cartPrueba))
+  const { cartId } = req.params;
+  return Cart_Item.findAll({ where: { cartId: cartId } })
+    .then(cart => res.json(cart))
     .catch(next);
+};
+
+function addProduct(req, res, next) {
+  const { cartId } = req.params;
+  const { productId, quantity } = req.body;
+
+  Product.findOne({ where: { id: productId } })
+    .then(product => {
+      product_id = product.id
+    })
+
+  Cart.findByPk(cartId)
+    .then(c => {
+      return Cart_Item.findOrCreate({ where: { cartId: cartId, productId: productId, quantity: quantity } })
+        .then(result => res.status(201).json(result))
+    })
+    .catch(next)
 }
 
-/*function getOneProduct(req, res, next) {
-  // Producto de ID especifico
-  const { id } = req.params;
-
-  return Product.findOne({
-    where: {
-      // id de busqueda
-      id,
-    },
-  }).then(product => res.json(product))
-    .catch(next);
-}*/
-
 function editQuantity(req, res, next) {
-  const { id } = req.params;
-  const { title, description, stock, price, picture } = req.body;
+  const { cartId } = req.params;
+  const { productId, quantity } = req.body;
 
-  if (!req.body.id) {
-    throw new Error('Producto no encontrado.');
-  }
-
-  Product.update({
-    where: { id },
-  }, {
-    title,
-    description,
-    stock,
-    price,
-    picture
-  }).then(editedProduct => res.status(202).json(editedProduct))
+  return Cart_Item.update({ 
+    quantity
+  },{
+    where: { cartId, productId },
+    returning: true,
+  }).then(editedQuantity =>{
+    const response = editedQuantity[1]
+    res.json(response)
+  })
     .catch(next);
 }
 
 function deleteItem(req, res, next) {
-  const { id } = req.params;
+  const { cartId } = req.params;
+  const { productId } = req.body;
 
-  Product.destroy({
-    where: { id },
-  }).then(result => res.status(204).json(result))
+  return Cart_Item.destroy({
+    where: { cartId, productId }
+  },{
+    productId
+  }).then(deletedItem =>
+    res.status(202).json(deletedItem))
     .catch(next);
 }
 
 function deleteAll(req, res, next) {
-  const { id } = req.params;
+  const { cartId } = req.params;
 
-  Product.destroy({
-    where: { id },
-  }).then(result => res.status(204).json(result))
+  return Cart_Item.destroy({
+    where: { cartId }
+  }).then(deletedAll =>
+    res.status(202).json("Carrito vaciado correctamente"))
     .catch(next);
 }
 
 module.exports = {
   createCart,
   getCart,
+  addProduct,
   editQuantity,
   deleteItem,
   deleteAll
