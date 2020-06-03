@@ -3,9 +3,9 @@ import {Link} from "react-router-dom";
 import './NavBar.css'
 
 export default function NavBar ({handleFilter, removeFilter}) {
-    
+
     var [filter, setFilter] = useState('');
-    
+
     function onSubmit (e){
       e.preventDefault();
       handleFilter(filter);
@@ -15,7 +15,7 @@ export default function NavBar ({handleFilter, removeFilter}) {
       e.preventDefault();
       removeFilter()
     }
-    
+
 
     return (
       <nav className="navbar navbar-dark bg-dark">
@@ -43,7 +43,5 @@ export default function NavBar ({handleFilter, removeFilter}) {
       </form>
       </nav>
     );
-  
+
 }
-
-
