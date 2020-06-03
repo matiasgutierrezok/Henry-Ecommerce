@@ -48,9 +48,10 @@ function editQuantity(req, res, next) {
   return Cart_Item.update({ 
     quantity
   },{
-    where: { cartId, productId }   
+    where: { cartId, productId },
+    returning: true   
   }).then(editedQuantity =>
-    res.status(202).json("Cambios realizados exitosamente"))
+    res.status(202).json(editedQuantity[1][0]))
     .catch(next);
 }
 
