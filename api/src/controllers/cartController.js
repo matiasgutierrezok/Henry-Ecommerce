@@ -22,8 +22,6 @@ function getCart(req, res, next) {
     .catch(next);
 };
 
-//Busca todos los productos vinculados al cartId dentro de la tabla Cart_Item
-
 function addProduct(req, res, next) {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
@@ -49,9 +47,11 @@ function editQuantity(req, res, next) {
     quantity
   },{
     where: { cartId, productId },
-    returning: true   
-  }).then(editedQuantity =>
-    res.status(202).json(editedQuantity[1][0]))
+    returning: true,
+  }).then(editedQuantity =>{
+    const response = editedQuantity[1]
+    res.json(response)
+  })
     .catch(next);
 }
 
@@ -86,4 +86,3 @@ module.exports = {
   deleteItem,
   deleteAll
 };
-

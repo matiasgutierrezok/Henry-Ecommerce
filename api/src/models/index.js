@@ -20,7 +20,7 @@ const {
   Product,
   Categories,
   Cart,
-  Cart_Item,
+  Cart_Item
 } = models;
 
 // Add model relationships here
