@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
+
 import "./ProductDetail.css";
 
 export default function ProductDetail({id, title, price, description, stock, category, img }) {
@@ -26,6 +27,7 @@ export default function ProductDetail({id, title, price, description, stock, cat
               <h5>Categorias: {category + " "}</h5>
               <h5>Description: </h5>
               <span>{description} || asdasdasdasda</span>
+
             </div>
           </div>
         </div>

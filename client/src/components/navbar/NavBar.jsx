@@ -6,6 +6,7 @@ import SearchBar from '../searchbar/SearchBar.jsx'
  export default function NavBar ({handleKeyword}) {
 
 
+
     return (
       <div class="navbar-up">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,3 +34,4 @@ import SearchBar from '../searchbar/SearchBar.jsx'
       </div>    
     );
 }
+
