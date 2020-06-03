@@ -12,6 +12,7 @@ export default function ProductCard ({id, title, price, picture, details, stock,
     return (
       <div className="card" key={id}>
         <div className="card-body">
+
           <div >
             <div >
                 <img className="iconoClima" src={picture} width="250" height="250" alt={title} />
@@ -23,7 +24,9 @@ export default function ProductCard ({id, title, price, picture, details, stock,
               <h4>Stock: </h4>
               <p>{stock}</p>
             </div>
-            <hr/>
+
+            <h1 className="card-title">{{title} || 'Someitem'}</h1>
+
             <div className="col-sm-6 col-md-6 col-lg-6">
               <h4>Descripción: </h4>
               <p>{description}</p>
