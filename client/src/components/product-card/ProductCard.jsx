@@ -25,7 +25,7 @@ export default function ProductCard ({id, title, price, picture, details, stock,
               <p>{stock}</p>
             </div>
 
-            <h1 className="card-title">{{title} || 'Someitem'}</h1>
+            <h1 className="card-title">{title}</h1>
 
             <div className="col-sm-6 col-md-6 col-lg-6">
               <h4>Descripción: </h4>
