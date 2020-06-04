@@ -4,14 +4,13 @@ import {Link} from "react-router-dom";
 
 import "./ProductDetail.css";
 
-export default function ProductDetail({id, title, price, description, stock, category, img }) {
+export default function ProductDetail({id, title, price, description, stock, category, picture }) {
 
   return (
     <div className="prodDetail">
-      <hr/>
         <div className="flex-container">
           <div className="flex-left">
-            <img src='https://www.placecage.com/c/300/220' alt={title} />
+            <img src={picture} alt={title} />
           </div>
 
           <div className="flex-right">
@@ -20,13 +19,14 @@ export default function ProductDetail({id, title, price, description, stock, cat
               <button className="btnProdDetail"> <Link to="/product">Return to products </Link> </button>
               <button className="btnProdDetail"> <Link to={"/createproduct/" + id}>Modify product </Link></button>
             </div>
-            <h3>{title}'someitem'</h3>
+            <hr/>
+            <h3>{title}</h3>
             <div>
               <h5>Price: $ {price}</h5>
               <h5>Stock: {stock}</h5>
-              <h5>Categorias: {category + " "}</h5>
+              <h5>Categorias: {category}</h5>
               <h5>Description: </h5>
-              <span>{description} || asdasdasdasda</span>
+              <span>{description}</span>
 
             </div>
           </div>
