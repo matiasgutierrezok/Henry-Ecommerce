@@ -67,19 +67,19 @@ function editProduct(req, res, next) {
   const { id } = req.params;
   const { title, description, stock, price, picture } = req.body;
 
-  if (!req.body.id) {
+  if (!req.params.id) {
     throw new Error('Producto no encontrado.');
   }
 
   Product.update({
-    where: { id },
-  }, {
     title,
     description,
     stock,
     price,
     picture
-  }).then(editedProduct => res.status(202).json(editedProduct))
+  },{
+    where: { id }
+  } ).then(editedProduct => res.status(202).json(editedProduct))
     .catch(next);
 }
 

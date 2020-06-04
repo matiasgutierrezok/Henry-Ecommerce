@@ -20,7 +20,10 @@ import SearchBar from '../searchbar/SearchBar.jsx'
                 <a className="nav-link" href="/product">Productos</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/createproduct" aria-disabled="true">Vender</a>
+                <a className="nav-link" href="/createproduct" aria-disabled="true">Crear Producto</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/cart" aria-disabled="true">My Cart</a>
               </li>
               <li id="asd">
             <SearchBar handleKeyword={handleKeyword}/>
