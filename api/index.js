@@ -24,7 +24,7 @@ const { conn } = require('./src/models/index.js');
 // Syncing all the models at once.
 const port = 4000;
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
 
   server.listen(port, () => {
     console.log(`%s listening at ${port}`); // eslint-disable-line no-console

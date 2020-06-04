@@ -16,7 +16,7 @@ const User = (sequelize, S) => {
       validate: {
         isEmail: true,
       },
-      primaryKey: true,
+      primaryKey: true
     },
     passwordsalt: {
       type: S.STRING,
