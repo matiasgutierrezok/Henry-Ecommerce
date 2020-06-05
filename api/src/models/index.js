@@ -34,7 +34,7 @@ Categories.belongsToMany(Product, {
 });
 
 User.hasMany(Cart);
-Cart.belongsTo(User, {foreignKey: 'userId'});
+Cart.belongsTo(User);
 
 
 

@@ -10,13 +10,13 @@ const User = (sequelize, S) => {
       type: S.INTEGER,
       allowNull: false,
       autoIncrement: true,
+      primaryKey: true
     },
     email: {
       type: S.STRING,
       validate: {
         isEmail: true,
-      },
-      primaryKey: true
+      }
     },
     passwordsalt: {
       type: S.STRING,
