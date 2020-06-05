@@ -7,5 +7,10 @@ server.get('/', (req, res, next) => {
     .catch(next);
 });
 
+// Post Crear nuevo
+server.post('/', createUser);
+
+// GET: devuelve los items dentro de un carrito
+server.get('/:userId', getUser);
 
 module.exports = server;
