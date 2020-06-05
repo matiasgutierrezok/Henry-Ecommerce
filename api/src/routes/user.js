@@ -1,5 +1,6 @@
 const { User } = require('models/index.js');
 const server = require('express').Router();
+const { createUser, getUser } = require('../controllers/userController.js');
 
 server.get('/', (req, res, next) => {
   User.findAll()

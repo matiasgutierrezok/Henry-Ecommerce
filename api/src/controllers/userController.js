@@ -13,7 +13,7 @@ function createUser(req, res, next) {
 
 function getUser(req, res, next) {
     const { userId } = req.params;
-    return User.findAll({ where: { userId } })
+    return User.findAll({ where: { id:userId } })
     .then(user => res.json(user))
     .catch(next);
 }
