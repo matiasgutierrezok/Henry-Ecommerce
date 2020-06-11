@@ -22,22 +22,29 @@ function createCart(req, res, next) {
 
 
 function getCart(req, res, next) {
-  const userId = req.params.userId;
-
-  return Cart_Item.findAll({ where: { cartId: cartId } })
-    .then(cart => res.json(cart))
-    .catch(next);
+  const Id = req.params.userId;
+  let quantitys;
+  return User.findByPk(Id)
+            .then(u => {
+              return Cart.findOne({where: {userId: u.id, state: 'created'}})
+            }).then(c =>{
+              if(!c){return res.status(404).json('User does not have a current cart open')}
+              return Cart_Item.findAll({where: {cartId: c.id}})
+            }).then(cts => {
+              if(cts.length === 0){return res.status(404).json('there are no products in the cart')}
+              var productIds = cts.map(c => c.productId);
+              quantitys = cts.map(c => c.quantity);
+              return Product.findAll({where: {id: productIds}})
+            }).then(result => {
+              return res.status(200).json([result, quantitys]);
+            }).catch(next);
 };
-
-
 
 function addProduct(req, res, next) {
   const Id = req.params.userId;
   const { productId, quantity } = req.body;
   Product.findOne({ where: { id: productId } })
-    .then(product => {
-        product_id = product.id
-    })
+    .then(product => { product_id = product.id })
   let cart,user;
   return User.findByPk(Id)
             .then(u => {
