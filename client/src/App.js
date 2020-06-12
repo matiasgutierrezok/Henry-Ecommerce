@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
 
 import './App.css';
 
@@ -10,6 +10,7 @@ import CreateProduct from './components/createproduct/CreateProduct.jsx';
 import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
 import Pagination from './components/pagination/pagination.jsx';
 import Cart from './components/cart/Cart.jsx';
+import Home from './components/home/Home.jsx';
 
 function App() {
   var [toDetail, setToDetail] = useState(null);
@@ -18,31 +19,42 @@ function App() {
   var [totalPages, setTotalPages ] = useState(1);
   var [userId, setUserId ] = useState(1);
 
+
   useEffect(() => {
-      fetch(`http://localhost:4000/product/paged/${page}`, {
-        method: 'GET'
-      }).then(response =>
-        response.json())
-        .then(results => {
-          setArray(results.data);
-          setPage(results.currentPage);
-          setTotalPages(results.totalPages);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        })
-    },[page]);
+    fetch(`http://localhost:4000/product/paged/${page}`, {
+      method: 'GET'
+    }).then(response =>
+      response.json())
+      .then(results => {
+        setArray(results.data);
+        setPage(results.currentPage);
+        setTotalPages(results.totalPages);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      })
+  }, [page]);
 
   //leer al final de ver que hace paginacion para mayor comprension.
   const paginate = pageNumber => setPage(pageNumber);
 
-  function details (id){
+  function details(id) {
     setToDetail(array.filter((p) =>
-     p.id === id)[0]
-    )}
+      p.id === id)[0]
+    )
+  }
 
-  function handleKeyword (){
+  function handleFilter(filtro) {
+    let pivot = array.filter((p) => p.category.includes(filtro));
+    if (pivot.length > 0) {
+      setArray(pivot);
+    } else {
+      setArray(array);
+    };
+  }
 
+  function removeFilter() {
+    setArray(array);
   }
 
 
@@ -52,13 +64,16 @@ function App() {
         <Route path="/">
           <NavBar handleKeyword={handleKeyword} userId={userId} />
         </Route>
+        <Route exact path="/home">
+          <Home/>
+        </Route>
         <Route exact path="/product" >
           <Pagination
-            pageEnd= { totalPages }
-            paginate = { paginate }/>
+            pageEnd={totalPages}
+            paginate={paginate} />
           <Board
             products={array}
-            details={details}/>
+            details={details} />
         </Route>
         <Route path="/product/:id" >
           <ProductDetail {...toDetail}  userId={userId} />
@@ -67,7 +82,9 @@ function App() {
           <CreateProduct />
         </Route>
         <Route path="/createproduct/:id" component={ModifyProduct} />
+
         <Route exact path="/cart/:userId" component={Cart} >
+
         </Route>
       </div>
     </BrowserRouter>

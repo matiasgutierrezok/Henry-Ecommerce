@@ -13,10 +13,10 @@ export default function SearchBar({ handleKeyword }) {
 
     return (
 
-        <div className="navbar navbar-light">
+        <div className="navbar">
             <form className="form-inline my-2 my-lg-0" onSubmit={onSubmit} width="225px">
-                <input className="form-control mr-sm-2" type="search" placeholder="Escribí una palabra clave..." aria-label="Search" value={keyword} onChange={e => setKeyword(e.target.value)} />
-                <button className="btn btn-outline-success my-2 my-sm-0" type='submit'>Buscar</button>
+                <input className="form-control mr-sm-2" type="search" placeholder="Palabra clave.." aria-label="Search" value={keyword} onChange={e => setKeyword(e.target.value)} />
+                <button className="btn btn-outline-success my-2 my-sm-0" type='submit'>Vamos!</button>
             </form>
         </div>
     );

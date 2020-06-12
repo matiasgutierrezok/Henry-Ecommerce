@@ -1,38 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Playfair+Display&display=swap');
+
+.navbar-up {
+	z-index: 999;
+	background-color:#373737;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+
+}
+.navbar {
+	background-color:#373737;
+}
+body {
+	font-family: 'Playfair Display', serif;
+}
+#search {
+	position: fixed;
+	right: 10px;
+}
 #brand{
 	margin-left: 16px;
 	margin-right: 16px;
 }
-#asd{
-	display: flex;
-	justify-content: flex-end;
+a {
+	color: white;
 }
-/*#logoHenry {
-  margin-right: 20px;
+a:hover {
+	color: #F5CB5C;
+	font-size: 108%;
 }
-
-.navbar-brand {
-	display: flex;
-	flex-direction: row;
-	color:green; 
-	font-weight:bold; 
-	text-decoration: underline; 
-	font-style: italic;
+h1 {
+	color: #F5CB5C;;
 }
-.navbar{
-	
-    
-}
-.navbar-brand h2 {
-	display: flex;
-	margin-bottom: 0px;
-	font-size: 22px;
-}
-#logoHenry {
-	width: 30px;
-	height: 30px;
-}
-
-#formulario {
-	display: flex;
-	margin-left: auto;
-}*/
