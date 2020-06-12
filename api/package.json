@@ -7,7 +7,8 @@
     "start": "NODE_PATH=./src nodemon -L",
     "forever": "NODE_PATH=./src forever index.js",
     "test": "NODE_PATH=./src mocha -w ./tests/**/*.spec.js",
-    "testOne": "NODE_PATH=./src mocha -w"
+    "testOne": "NODE_PATH=./src mocha -w",
+    "seed": "node seed.js"
   },
   "author": "Dev5",
   "license": "ISC",

@@ -1,0 +1,18 @@
+.back-image {
+    min-height: 80%;
+    position: fixed;
+    bottom: 0;
+}
+.title {
+    z-index: 998;
+    position: absolute;
+    top: 170px;
+    left: 150px;
+}
+.tu-casa-text {
+    margin-left: 120px;
+    margin-top: 30px;
+    padding: 0px 20px 5px 20px;
+    background-color:#1b1b1b;
+    font-size: 350%;
+}

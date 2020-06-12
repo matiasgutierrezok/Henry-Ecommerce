@@ -1,8 +1,7 @@
 .card {
   margin: 20px;
   width: 18rem;
-
-  background-color: #282c34;
+  background-color: E8EDDF;
 }
 
 .pictureEdit{
@@ -23,6 +22,15 @@
 .card-body {
 	display: flex;
 	justify-content: center;
-  	margin-top: 0px !important;
-  	padding-top: 0px !important;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+span {
+  font-size: 90%;
+  margin-bottom: 60px;
+}
+
+.card-click {
+  cursor: pointer;
 }

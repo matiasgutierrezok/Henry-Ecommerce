@@ -18,7 +18,7 @@
 .buttonPagination {
   margin: 0 2%;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background-color:  transparent;
+	/* background-color:  transparent; */
 	border-radius:  6px;
 	border:  1px solid #dcdcdc;
 	display:  inline-block;
@@ -30,9 +30,9 @@
 	padding:  6px 9px;
 	text-decoration:  none;
 }
-.buttonPagination:hover {
+/* .buttonPagination:hover {
 	background-color:transparent;
-}
+} */
 .buttonPagination:active {
 	position:relative;
 	top:1px;
