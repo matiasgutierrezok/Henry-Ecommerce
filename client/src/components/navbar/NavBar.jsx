@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import './NavBar.css'
 import SearchBar from '../searchbar/SearchBar.jsx'
 
- export default function NavBar ({handleKeyword}) {
+ export default function NavBar ({handleKeyword, userId}) {
     return (
       <div className="navbar-up">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,7 +23,7 @@ import SearchBar from '../searchbar/SearchBar.jsx'
                 <a className="nav-link" href="/createproduct" aria-disabled="true">Crear Producto</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/cart" aria-disabled="true">My Cart</a>
+                <a className="nav-link" href={"/cart/" + userId} aria-disabled="true">My Cart</a>
               </li>
               <li id="asd">
             <SearchBar handleKeyword={handleKeyword}/>
