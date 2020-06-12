@@ -8,8 +8,8 @@ import Board from './components/board/Board.jsx';
 import NavBar from './components/navbar/NavBar.jsx';
 import CreateProduct from './components/createproduct/CreateProduct.jsx';
 import ModifyProduct from './components/modifyproduct/ModifyProduct.jsx';
-import Pagination from './components/pagination/pagination.jsx'
-
+import Pagination from './components/pagination/pagination.jsx';
+import Cart from './components/cart/Cart.jsx';
 
 function App() {
   var [toDetail, setToDetail] = useState(null);
@@ -75,6 +75,9 @@ function App() {
           <CreateProduct />
         </Route>
         <Route path="/createproduct/:id" component={ModifyProduct} />
+        <Route exact path="/cart" >
+          <Cart products={array} quantity={7}/>
+        </Route>
       </div>
     </BrowserRouter>
   );

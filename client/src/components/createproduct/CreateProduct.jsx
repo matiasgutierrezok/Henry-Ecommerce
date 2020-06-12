@@ -45,7 +45,7 @@ export default function CreateProduct () {
 
 
     return (
-      <div>
+      <div className="form-container">
           <form className='myform' name="myForm"  onSubmit={enviar} >
             Title: <input type="text" name="ftitle" value={newProduct.title} onChange={e => setNewProduct({...newProduct, title: e.target.value})}/> <br/>
             Price: <input type="text" name="fprice" value={newProduct.price} onChange={e => setNewProduct({...newProduct, price: e.target.value})}/> <br/>

@@ -5,7 +5,12 @@ const Cart = (db, Sequelize) => {
             primaryKey: true,
             allowNull: false,
             autoIncrement: true
-        }
+        },
+        state: {
+	      type: Sequelize.ENUM,
+	      values: ['created', 'inprogress', 'finished'],
+	      defaultValue: 'created'
+    	}
     });
     return C;
 }

@@ -33,8 +33,11 @@ Categories.belongsToMany(Product, {
   through: 'categoriesAssociation'
 });
 
+User.hasMany(Cart);
 Cart.belongsTo(User);
-User.hasOne(Cart);
+
+
+
 Cart.belongsToMany(Product, { through: Cart_Item });
 Product.belongsToMany(Cart, { through: Cart_Item });
 

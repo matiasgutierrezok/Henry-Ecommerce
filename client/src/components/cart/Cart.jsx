@@ -3,7 +3,7 @@ import React from 'react';
 import CartProduct from '../cartproduct/CartProduct.jsx';
 
 
-export default function MyCart({products, quantity}) {
+export default function Cart({products, quantity}) {
   
 
 

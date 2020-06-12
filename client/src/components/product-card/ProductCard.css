@@ -1,11 +1,11 @@
 .card {
   margin: 20px;
   width: 18rem;
-  
+
   background-color: #282c34;
 }
 
-.iconoClima{
+.pictureEdit{
   display:flex;
   margin-top: 15px;
 }
