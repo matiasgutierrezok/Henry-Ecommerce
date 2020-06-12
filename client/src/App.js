@@ -16,6 +16,7 @@ function App() {
   var [array, setArray] = useState([]);
   var [page, setPage] = useState(1);
   var [totalPages, setTotalPages ] = useState(1);
+  var [userId, setUserId ] = useState(1);
 
   useEffect(() => {
       fetch(`http://localhost:4000/product/paged/${page}`, {
@@ -40,25 +41,16 @@ function App() {
      p.id === id)[0]
     )}
 
+  function handleKeyword (){
 
-  function handleFilter (filtro){
-    let pivot = array.filter((p) => p.category.includes(filtro));
-    if (pivot.length > 0) {
-       setArray(pivot);
-    }else{
-       setArray(array);
-    };
   }
 
-  function removeFilter(){
-    setArray(array);
-  }
 
   return (
     <BrowserRouter>
       <div className='App-header'>
         <Route path="/">
-          <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
+          <NavBar handleKeyword={handleKeyword} userId={userId} />
         </Route>
         <Route exact path="/product" >
           <Pagination
@@ -69,14 +61,13 @@ function App() {
             details={details}/>
         </Route>
         <Route path="/product/:id" >
-          <ProductDetail {...toDetail} />
+          <ProductDetail {...toDetail}  userId={userId} />
         </Route>
         <Route exact path="/createproduct" >
           <CreateProduct />
         </Route>
         <Route path="/createproduct/:id" component={ModifyProduct} />
-        <Route exact path="/cart" >
-          <Cart products={array} quantity={7}/>
+        <Route exact path="/cart/:userId" component={Cart} >
         </Route>
       </div>
     </BrowserRouter>

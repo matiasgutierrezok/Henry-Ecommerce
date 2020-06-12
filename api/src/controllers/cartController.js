@@ -31,9 +31,9 @@ function getCart(req, res, next) {
               if(!c){return res.status(404).json('User does not have a current cart open')}
               return Cart_Item.findAll({where: {cartId: c.id}})
             }).then(cts => {
-              if(cts.length === 0){return res.status(404).json('there are no products in the cart')}
+              if(cts.length === 0){return res.status(404).json(null)}
               var productIds = cts.map(c => c.productId);
-              quantitys = cts.map(c => c.quantity);
+              quantitys = cts.map(c => {return {cant: c.quantity, productId: c.productId}});
               return Product.findAll({where: {id: productIds}})
             }).then(result => {
               return res.status(200).json([result, quantitys]);
