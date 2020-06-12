@@ -16,7 +16,9 @@ function App() {
   var [toDetail, setToDetail] = useState(null);
   var [array, setArray] = useState([]);
   var [page, setPage] = useState(1);
-  var [totalPages, setTotalPages] = useState(1);
+  var [totalPages, setTotalPages ] = useState(1);
+  var [userId, setUserId ] = useState(1);
+
 
   useEffect(() => {
     fetch(`http://localhost:4000/product/paged/${page}`, {
@@ -55,11 +57,12 @@ function App() {
     setArray(array);
   }
 
+
   return (
     <BrowserRouter>
       <div className='App-header'>
         <Route path="/">
-          <NavBar handleFilter={handleFilter} removeFilter={removeFilter} />
+          <NavBar handleKeyword={handleKeyword} userId={userId} />
         </Route>
         <Route exact path="/home">
           <Home/>
@@ -73,14 +76,15 @@ function App() {
             details={details} />
         </Route>
         <Route path="/product/:id" >
-          <ProductDetail {...toDetail} />
+          <ProductDetail {...toDetail}  userId={userId} />
         </Route>
         <Route exact path="/createproduct" >
           <CreateProduct />
         </Route>
         <Route path="/createproduct/:id" component={ModifyProduct} />
-        <Route exact path="/cart" >
-          <Cart products={array} quantity={7} />
+
+        <Route exact path="/cart/:userId" component={Cart} >
+
         </Route>
       </div>
     </BrowserRouter>

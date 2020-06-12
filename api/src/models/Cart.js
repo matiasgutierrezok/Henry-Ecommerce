@@ -8,8 +8,8 @@ const Cart = (db, Sequelize) => {
         },
         state: {
 	      type: Sequelize.ENUM,
-	      values: ['uncreated', 'created', 'inprogress', 'finished'],
-	      defaultValue: 'uncreated'
+	      values: ['created', 'inprogress', 'finished'],
+	      defaultValue: 'created'
     	}
     });
     return C;

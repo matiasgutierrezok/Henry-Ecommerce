@@ -4,7 +4,27 @@ import { Link } from "react-router-dom";
 
 import "./ProductDetail.css";
 
-export default function ProductDetail({ id, title, price, description, stock, category, picture }) {
+
+export default function ProductDetail({id, title, price, description, stock, category, picture, userId}) {
+
+  function addToCart (e){
+    e.preventDefault();
+    fetch(`http://localhost:4000/cart/addProduct/${userId}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "productId": id,
+          "quantity": 1
+        })
+      }).then(response => response.json())
+        .then(results => {if (results.id){alert('Product added to cart')}})
+        .catch((error) => {
+          console.error('Error:', error);
+        })
+  }
 
   return (
     <div className="prodDetail">
@@ -25,8 +45,9 @@ export default function ProductDetail({ id, title, price, description, stock, ca
             <p>{description}</p>
             <hr />
             <div className="btnContainer">
-              <button className="btnProdDetail"> <Link to={"/createproduct/" + id}>Agregar al carrito</Link> </button>
-              <button className="btnProdDetail"> <Link to={"/createproduct/" + id}>Crear producto</Link></button>
+              <button className="btnProdDetail" onClick={e => addToCart(e)}>Agregar al carrito </button>
+              <button className="btnProdDetail"> <Link to={"/createproduct/" + id}>Modificar producto</Link></button>
+
             </div>
           </div>
         </div>
