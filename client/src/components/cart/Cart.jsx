@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import CartProduct from '../cartproduct/CartProduct.jsx';
-
+import './Cart.css';
 
 export default function Cart(props) {
   var [cart_products, setCart_products] = useState([]);
@@ -128,7 +128,7 @@ export default function Cart(props) {
     }
 
   return (
-    <div >
+    <div className='myCart'>
       <h1>My Cart</h1>
       {toShow()}
 
