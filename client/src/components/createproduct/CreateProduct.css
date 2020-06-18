@@ -1,31 +1,31 @@
-.myform {
+.form-nuevo-producto {
+	width: 700px;
+	height: 480px;
 	padding: 15px 30px;
 	display: flex;
 	flex-direction: column;
-	margin: 5px 0;
-	background-color: #465871;
-	/* borde redondeado */
+	margin-top: 82px !important;
+	background-color: white;
 	border-radius: 25px;
-  border: 2px solid #73AD21;
 }
-
 .btnCreacteProduct {
-  margin: 0 2% 3% 0;
+	margin: 0 2% 3% 0;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background-color:  transparent;
+	background-color: black;
 	border-radius:  6px;
 	border:  1px solid #dcdcdc;
 	display:  inline-block;
 	cursor: pointer;
-	color: #b2e3fe;
+	color: white;
 	font-family:  Arial;
-	font-size:  15px;
+	font-size:  12px;
 	font-weight:  bold;
 	padding:  6px 9px;
 	text-decoration:  none;
 }
 .btnCreacteProduct:hover {
 	background-color:transparent;
+	color: black;
 }
 .btnCreacteProduct:active {
 	position:relative;

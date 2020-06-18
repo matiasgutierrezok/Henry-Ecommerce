@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './CreateProduct.css'
 
-
 export default function CreateProduct () {
     var [newProduct, setNewProduct] = useState({title: '', price: '', stock: '', category: '', description: '', picture: ''});
 
@@ -41,12 +40,9 @@ export default function CreateProduct () {
       });
     }
 
-
-
-
     return (
       <div className="form-container">
-          <form className='myform' name="myForm"  onSubmit={enviar} >
+          <form className=''  onSubmit={enviar} >
             Title: <input type="text" name="ftitle" value={newProduct.title} onChange={e => setNewProduct({...newProduct, title: e.target.value})}/> <br/>
             Price: <input type="text" name="fprice" value={newProduct.price} onChange={e => setNewProduct({...newProduct, price: e.target.value})}/> <br/>
             Stock: <input type="text" name="fstock" value={newProduct.stock} onChange={e => setNewProduct({...newProduct, stock: e.target.value})}/> <br/>

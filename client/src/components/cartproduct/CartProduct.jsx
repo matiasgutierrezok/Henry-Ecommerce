@@ -5,8 +5,6 @@ import {Link} from "react-router-dom";
 export default function CartProduct ({id, title, price, quantity}) {
     var [amount, setAmount] = useState(quantity)
     
-
-
     return (
       <div>
         <div className='product'>

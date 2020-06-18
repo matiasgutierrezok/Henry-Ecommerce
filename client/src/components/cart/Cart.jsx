@@ -5,8 +5,6 @@ import CartProduct from '../cartproduct/CartProduct.jsx';
 
 export default function Cart({products, quantity}) {
   
-
-
   return (
     <div >
       <h1>My Cart</h1>
