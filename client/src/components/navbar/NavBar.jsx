@@ -12,6 +12,7 @@ export default function NavBar({ handleKeyword }) {
           <ul className="navbar-nav mt-2 mt-lg-0">
             <li className="nav-item active">
               <Link to="/home" className="nav-link" href="#">Inicio <span className="sr-only">(current)</span></Link>
+
             </li>
             <li className="">
               <a className="nav-link" href="/user">Registrate</a>
